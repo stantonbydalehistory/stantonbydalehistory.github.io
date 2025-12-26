@@ -1,0 +1,28 @@
+{{ define "main" }}
+<h1>🏛️ Buildings</h1>
+<p style="font-style: italic; color: #7d6c5a; font-size: 1.1rem; margin-bottom: 2rem;">
+  Historic structures and landmarks that tell the story of our village's architectural heritage.
+</p>
+
+<div class="content-section">
+  {{ $pages := where site.RegularPages "Section" "building" }}
+  {{ $pagesByStreet := $pages.GroupByParam "street" }}
+  
+  {{ range $pagesByStreet }}
+    <h2 style="margin-top: 2rem;">{{ if .Key }}{{ .Key }}{{ else }}Location Unknown{{ end }}</h2>
+    <ul>
+      {{ range .Pages }}
+        <li style="margin-bottom: 1rem;">
+          <a href="{{ .RelPermalink }}" style="font-weight: bold; font-size: 1.05rem;">{{ .Title }}</a>
+          {{ with .Params.type }}<br><small style="color: #7d6c5a;">Type: {{ . }}</small>{{ end }}
+          {{ with .Params.current_status }}<br><small style="color: #7d6c5a;">Status: {{ . }}</small>{{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+  
+  {{ if eq (len $pages) 0 }}
+    <p style="font-style: italic; color: #999;">No buildings found yet.</p>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,44 @@
+{{ define "main" }}
+<h1>👤 Residents</h1>
+<p style="font-style: italic; color: #7d6c5a; font-size: 1.1rem; margin-bottom: 2rem;">
+  The people who lived, worked, and contributed to the life of Stanton-by-Dale through the ages.
+</p>
+
+<div class="content-section">
+  {{ $pages := where site.RegularPages "Section" "resident" }}
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+    {{ range $pages.ByTitle }}
+      <div style="background: #f9f7f4; padding: 1.25rem; border-radius: 4px; border-left: 4px solid #8b7355;">
+        <h3 style="margin-top: 0;">
+          <a href="{{ .RelPermalink }}" style="border: none;">{{ .Title }}</a>
+        </h3>
+        
+        {{ if or .Params.birth .Params.death }}
+          <p style="color: #7d6c5a; font-size: 0.9rem; margin: 0.5rem 0;">
+            {{ if .Params.birth }}{{ .Params.birth }}{{ end }}
+            {{ if and .Params.birth .Params.death }} – {{ end }}
+            {{ if .Params.death }}{{ .Params.death }}{{ end }}
+          </p>
+        {{ end }}
+        
+        {{ with .Params.roles }}
+          <p style="margin: 0.5rem 0;">
+            <small style="color: #7d6c5a;">💼 {{ delimit . ", " }}</small>
+          </p>
+        {{ end }}
+        
+        {{ with .Params.notes }}
+          <p style="font-size: 0.9rem; margin-top: 0.75rem; color: #5a4a3a;">
+            {{ . | truncate 120 }}
+          </p>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+  
+  {{ if eq (len $pages) 0 }}
+    <p style="font-style: italic; color: #999;">No residents found yet.</p>
+  {{ end }}
+</div>
+{{ end }}

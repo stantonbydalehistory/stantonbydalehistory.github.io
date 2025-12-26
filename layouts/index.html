@@ -1,0 +1,59 @@
+{{ define "main" }}
+<div style="text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #f5f2ed 0%, #e5ddd3 100%); border-radius: 8px;">
+  <h1 style="border: none; color: #5a4a3a; margin: 0;">{{ .Title }}</h1>
+  <p style="font-size: 1.1rem; color: #7d6c5a; margin-top: 1rem;">{{ .Content }}</p>
+</div>
+
+<div class="content-section">
+  <h2>📜 Recent Records</h2>
+  <p style="font-style: italic; color: #7d6c5a;">Glimpses into the village's past...</p>
+  <ul style="list-style: none; margin-left: 0;">
+    {{ range first 10 (where site.RegularPages "Section" "records") }}
+      <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
+        <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
+        {{ with .Date }}<span class="date"> – {{ .Format "2 January 2006" }}</span>{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+  <p style="text-align: right; margin-top: 1rem;"><a href="/records/">View all records →</a></p>
+</div>
+
+<hr>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
+  
+  <div class="content-section">
+    <h2>🏛️ Buildings</h2>
+    <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">Historic structures and landmarks</p>
+    <ul>
+      {{ range first 8 (where site.RegularPages "Section" "building") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+    <p style="text-align: right; margin-top: 1rem;"><a href="/building/">View all buildings →</a></p>
+  </div>
+
+  <div class="content-section">
+    <h2>🏢 Institutions</h2>
+    <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">Village organizations and businesses</p>
+    <ul>
+      {{ range first 8 (where site.RegularPages "Section" "institution") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+    <p style="text-align: right; margin-top: 1rem;"><a href="/institution/">View all institutions →</a></p>
+  </div>
+
+  <div class="content-section">
+    <h2>👤 Residents</h2>
+    <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">People who shaped our community</p>
+    <ul>
+      {{ range first 8 (where site.RegularPages "Section" "resident") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+    <p style="text-align: right; margin-top: 1rem;"><a href="/resident/">View all residents →</a></p>
+  </div>
+  
+</div>
+{{ end }}

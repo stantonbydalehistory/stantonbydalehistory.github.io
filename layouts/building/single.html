@@ -1,0 +1,85 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+<p>
+  {{ if .Params.street }}
+    Street: <a href="/streets/{{ urlize .Params.street }}/">{{ .Params.street }}</a><br>
+  {{ end }}
+  {{ if .Params.number }}Number: {{ .Params.number }}<br>{{ end }}
+  {{ if .Params.name }}Name: {{ .Params.name }}<br>{{ end }}
+</p>
+
+<hr>
+
+<h2>Institutions in this building</h2>
+{{ with .Params.institutions }}
+  <ul>
+    {{ range . }}
+      {{ with site.GetPage . }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{ with .Params.institution_type }} ({{ . }}){{ end }}
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>No institutions recorded at this building.</p>
+{{ end }}
+
+<hr>
+
+<h2>Residents connected with this building</h2>
+<ul>
+
+  {{/* DIRECT residents assigned to this building */}}
+  {{ with .Params.residents }}
+    {{ range . }}
+      {{ with site.GetPage . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* RESIDENTS via institutions inside this building */}}
+  {{ with .Params.institutions }}
+    {{ range . }}
+      {{ $inst := site.GetPage . }}
+      {{ if $inst }}
+        {{ range $inst.Params.residents }}
+          {{ with site.GetPage . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> (via {{ $inst.Title }})</li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+</ul>
+
+<hr>
+
+<h2>Historical Records</h2>
+<ul>
+
+  {{/* Records that reference THIS building explicitly */}}
+  {{ range where site.RegularPages "Params.buildings" "intersect" (slice .Path) }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+
+  {{/* Records that reference INSTITUTIONS in this building */}}
+  {{ with .Params.institutions }}
+    {{ range . }}
+      {{ $inst := site.GetPage . }}
+      {{ if $inst }}
+        {{ range where site.RegularPages "Params.institutions" "intersect" (slice $inst.Path) }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> (via {{ $inst.Title }})</li>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+</ul>
+
+{{ end }}

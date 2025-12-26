@@ -1,0 +1,101 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  
+  <div class="metadata">
+    <p><strong>📅 Date:</strong> <span class="date">{{ .Date.Format "2 January 2006" }}</span></p>
+    
+    {{ with .Params.streets }}
+      <p><strong>📍 Location:</strong> {{ delimit . ", " }}</p>
+    {{ end }}
+    
+    {{ with .Params.themes }}
+      <p><strong>🏷️ Themes:</strong> {{ delimit . ", " }}</p>
+    {{ end }}
+  </div>
+
+  <div class="content-section">
+    {{ .Content }}
+  </div>
+
+  {{ if or .Params.buildings .Params.businesses .Params.institutions .Params.residents }}
+  <hr>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
+    
+    {{ with .Params.buildings }}
+    <div class="content-section">
+      <h3>🏛️ Buildings</h3>
+      <ul>
+        {{ range . }}
+          {{ with site.GetPage . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ with .Params.businesses }}
+    <div class="content-section">
+      <h3>🏪 Businesses</h3>
+      <ul>
+        {{ range . }}
+          {{ with site.GetPage . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ with .Params.institutions }}
+    <div class="content-section">
+      <h3>🏢 Institutions</h3>
+      <ul>
+        {{ range . }}
+          {{ with site.GetPage . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ with .Params.residents }}
+    <div class="content-section">
+      <h3>👤 Residents</h3>
+      <ul>
+        {{ range . }}
+          {{ with site.GetPage . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+    
+  </div>
+  {{ end }}
+
+  {{ with .Params.sources }}
+  <hr>
+  <div class="content-section">
+    <h2>📚 Sources</h2>
+    <ul>
+      {{ range . }}
+        <li style="background: #f9f7f4; padding: 1rem; margin-bottom: 1rem; border-radius: 4px; list-style: none;">
+          {{ if .type }}<strong>Type:</strong> {{ .type }}<br>{{ end }}
+          {{ if .title }}<strong>Title:</strong> <em>{{ .title }}</em><br>{{ end }}
+          {{ if .issue }}<strong>Issue:</strong> {{ .issue }}<br>{{ end }}
+          {{ if .date }}<strong>Date:</strong> {{ .date }}<br>{{ end }}
+          {{ if .page }}<strong>Page:</strong> {{ .page }}<br>{{ end }}
+          {{ if .url }}<a href="{{ .url }}" target="_blank" style="border-bottom: none;">🔗 View source</a><br>{{ end }}
+          {{ if .notes }}<strong>Notes:</strong> {{ .notes }}{{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</article>
+{{ end }}

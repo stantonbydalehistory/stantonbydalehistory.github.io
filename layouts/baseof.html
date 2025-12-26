@@ -1,0 +1,59 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+<div>
+  {{ .Content }}
+</div>
+
+<hr>
+
+<h2>Recent Records</h2>
+<ul>
+  {{ range first 10 (where site.RegularPages "Section" "records") }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ with .Date }} – <span>{{ .Format "2006-01-02" }}</span>{{ end }}
+    </li>
+  {{ end }}
+</ul>
+
+<hr>
+
+<h2>Buildings</h2>
+<ul>
+  {{ range where site.RegularPages "Section" "building" }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+
+<hr>
+
+<h2>Businesses</h2>
+<ul>
+  {{ range where site.RegularPages "Section" "business" }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+
+<hr>
+
+<h2>Residents</h2>
+<ul>
+  {{ range where site.RegularPages "Section" "resident" }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+
+<hr>
+
+<h2>Themes</h2>
+<ul>
+  {{ range $name, $term := site.Taxonomies.themes }}
+    <li>
+      <a href="{{ $term.Page.RelPermalink }}">{{ $term.Page.Title }}</a>
+      ({{ len $term.Pages }})
+    </li>
+  {{ end }}
+</ul>
+
+{{ end }}

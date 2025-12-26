@@ -1,0 +1,8 @@
+baseURL = "https://example.org/"
+title = "Village History"
+
+[taxonomies]
+street = "streets"
+theme = "themes"
+business_type = "business_types"
+resident_role = "resident_roles"

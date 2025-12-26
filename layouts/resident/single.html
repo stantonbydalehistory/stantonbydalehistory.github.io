@@ -1,0 +1,117 @@
+{{ define "main" }}
+<article>
+  <h1>👤 {{ .Title }}</h1>
+
+  <div class="metadata">
+    {{ if or .Params.birth .Params.death .Params.roles }}
+      {{ if .Params.birth }}<p><strong>📅 Born:</strong> {{ .Params.birth }}</p>{{ end }}
+      {{ if .Params.death }}<p><strong>⚰️ Died:</strong> {{ .Params.death }}</p>{{ end }}
+      {{ if .Params.roles }}<p><strong>💼 Roles:</strong> {{ delimit .Params.roles ", " }}</p>{{ end }}
+    {{ end }}
+    
+    {{ with .Params.aliases }}
+      <p><strong>Also known as:</strong> <em>{{ delimit . ", " }}</em></p>
+    {{ end }}
+    
+    {{ with .Params.notes }}
+      <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5ddd3;"><strong>ℹ️ Notes:</strong> {{ . }}</p>
+    {{ end }}
+  </div>
+
+  <div class="content-section">
+    {{ .Content }}
+  </div>
+
+  {{ if or .Params.buildings .Params.institutions }}
+  <hr>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
+    
+    {{ with .Params.buildings }}
+    <div class="content-section">
+      <h2>🏛️ Associated Buildings</h2>
+      <ul>
+        {{ range . }}
+          {{ with site.GetPage . }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              {{ with .Params.street }}<br><small style="color: #7d6c5a;">{{ . }}</small>{{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ with .Params.institutions }}
+    <div class="content-section">
+      <h2>🏢 Associated Institutions</h2>
+      <ul>
+        {{ range . }}
+          {{ with site.GetPage . }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              {{ with .Params.business_type }}<br><small style="color: #7d6c5a;">({{ . }})</small>{{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+    
+  </div>
+  {{ end }}
+
+  <hr>
+
+  <div class="content-section">
+    <h2>📜 Historical Records</h2>
+    <p style="font-style: italic; color: #7d6c5a; margin-bottom: 1rem;">Records mentioning {{ .Title }}</p>
+    
+    {{/* Resident ID from file path */}}
+    {{ $dir := trim .File.Dir "/" }}
+    {{ $personID := cond (eq $dir "") .File.BaseFileName (printf "%s/%s" $dir .File.BaseFileName) }}
+
+    {{/* All regular pages except residents/buildings/institutions */}}
+    {{ $pages := site.RegularPages }}
+    {{ $pages = where $pages "Section" "ne" "resident" }}
+    {{ $pages = where $pages "Section" "ne" "building" }}
+    {{ $pages = where $pages "Section" "ne" "institution" }}
+
+    {{ $foundRecords := false }}
+    
+    <ul>
+      {{/* Records directly referencing this resident */}}
+      {{ range where $pages "Params.residents" "intersect" (slice $personID) }}
+        {{ $foundRecords = true }}
+        <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
+          <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
+          {{ with .Date }}<br><span class="date">{{ .Format "2 January 2006" }}</span>{{ end }}
+        </li>
+      {{ end }}
+
+      {{/* Records referencing institutions this resident belongs to */}}
+      {{ with $.Params.institutions }}
+        {{ range . }}
+          {{ $instID := . }}
+          {{ $inst := site.GetPage $instID }}
+          {{ if $inst }}
+            {{ range where $pages "Params.institutions" "intersect" (slice $instID) }}
+              {{ $foundRecords = true }}
+              <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #bfa88f; border-radius: 4px;">
+                <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
+                <br><small style="color: #7d6c5a;">via {{ $inst.Title }}</small>
+                {{ with .Date }}<br><span class="date">{{ .Format "2 January 2006" }}</span>{{ end }}
+              </li>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ul>
+    
+    {{ if not $foundRecords }}
+      <p style="font-style: italic; color: #999;">No records found yet.</p>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

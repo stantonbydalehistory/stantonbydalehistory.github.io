@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.6;
+      color: #2c2c2c;
+      background: #f9f7f4;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #5a4a3a 0%, #7d6c5a 100%);
+      color: #f9f7f4;
+      padding: 2rem 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border-bottom: 4px solid #8b7355;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: normal;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    header p {
+      text-align: center;
+      font-style: italic;
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    
+    nav {
+      background: #8b7355;
+      padding: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    nav li {
+      margin: 0;
+    }
+    
+    nav a {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: #f9f7f4;
+      text-decoration: none;
+      transition: background 0.3s;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    nav a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 4px;
+    }
+    
+    footer {
+      background: #5a4a3a;
+      color: #f9f7f4;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+    
+    h1, h2, h3, h4 {
+      color: #5a4a3a;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      border-bottom: 3px solid #8b7355;
+      padding-bottom: 0.5rem;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      border-bottom: 2px solid #bfa88f;
+      padding-bottom: 0.3rem;
+    }
+    
+    h3 {
+      font-size: 1.4rem;
+    }
+    
+    a {
+      color: #7d6c5a;
+      text-decoration: none;
+      border-bottom: 1px dotted #7d6c5a;
+    }
+    
+    a:hover {
+      color: #5a4a3a;
+      border-bottom: 1px solid #5a4a3a;
+    }
+    
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    hr {
+      border: none;
+      border-top: 2px solid #e5ddd3;
+      margin: 2rem 0;
+    }
+    
+    .metadata {
+      background: #f5f2ed;
+      padding: 1rem;
+      border-left: 4px solid #8b7355;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    
+    .metadata p {
+      margin: 0.5rem 0;
+    }
+    
+    .date {
+      color: #7d6c5a;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+    
+    .content-section {
+      margin: 2rem 0;
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      nav ul {
+        flex-direction: column;
+      }
+      
+      nav a {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      main {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>{{ site.Title }}</h1>
+    <p>A Chronicle of Village Life Through the Centuries</p>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/records/">Records</a></li>
+      <li><a href="/building/">Buildings</a></li>
+      <li><a href="/institution/">Institutions</a></li>
+      <li><a href="/resident/">Residents</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  
+  <footer>
+    <p>&copy; {{ now.Format "2006" }} Stanton by Dale History | Preserving Our Heritage</p>
+  </footer>
+</body>
+</html>

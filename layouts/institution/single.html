@@ -1,0 +1,34 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+<p>Type: {{ .Params.institution_type }}</p>
+
+{{ with .Params.buildings }}
+  <h2>Building</h2>
+  <ul>
+    {{ range . }}
+      {{ with site.GetPage . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ end }}
+
+{{ with .Params.residents }}
+  <h2>Associated Residents</h2>
+  <ul>
+    {{ range . }}
+      {{ with site.GetPage . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ end }}
+
+<h2>Related Records</h2>
+<ul>
+  {{ range where site.RegularPages "Params.institutions" "intersect" (slice .File.Path) }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+{{ end }}
