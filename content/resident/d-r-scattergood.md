@@ -3,6 +3,7 @@ title: "D. R. Scattergood"
 aliases:
   - "D.R. Scattergood"
   - "Mr. D. R. Scattergood"
+  - "Mr Richard Dick Scattergood"
 roles:
   - publican
 birth: null

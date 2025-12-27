@@ -19,11 +19,8 @@ residents:
 
 sources:
   - type: "newspaper"
-    title: "Ilkeston Gazette"
-    issue: "Nov 1890"
-    date: 1890-11-28
-    page: 3
-    notes: "Exact transcription of a report describing the alleged theft of nine fowls from Richard Dick Scattergood of the Stanhope Arms, Stanton-by-Dale."
+    title: "Nottingham Evening Post"
+    date: 1904-12-26
 ---
 **ALLEGED THEFT OF FOWLS AT  
 STANTON-BY-DALE.**
