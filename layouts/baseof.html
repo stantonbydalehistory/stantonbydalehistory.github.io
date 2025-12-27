@@ -240,9 +240,9 @@
     <p>A Chronicle of Village Life Through the Centuries</p>
     
     <div class="search-container">
-      <form class="search-form" action="https://www.google.com/search" method="get" target="_blank">
-        <input type="hidden" name="sitesearch" value="stantonbydalehistory.github.io">
-        <input type="text" name="q" class="search-input" placeholder="Search the archive..." required>
+      <form class="search-form" action="https://www.google.com/search" method="get" target="_blank" onsubmit="this.q.value='site:stantonbydalehistory.github.io ' + this.search_query.value; return true;">
+        <input type="hidden" name="q">
+        <input type="text" name="search_query" class="search-input" placeholder="Search the archive..." required>
         <button type="submit" class="search-button">Search</button>
       </form>
     </div>
