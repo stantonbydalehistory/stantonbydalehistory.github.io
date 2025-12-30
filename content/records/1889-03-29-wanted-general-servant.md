@@ -3,7 +3,6 @@ title: "Wanted: General Servant at Stanhope Arms"
 date: 1889-03-02
 dateAdded: 2025-12-27
 
-streets: ["Stanton-by-Dale"]
 themes: ["employment", "domestic service"]
 
 buildings:

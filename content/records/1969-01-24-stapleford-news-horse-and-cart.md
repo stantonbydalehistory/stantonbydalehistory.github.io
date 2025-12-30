@@ -13,24 +13,21 @@ themes:
   - recreation
 
 buildings:
-  - building/stanton-by-dale/chequers-inn
-  - building/stanton-by-dale/stanhope-arms
-  - building/stanton-by-dale/st-michael-and-all-angels-church
-  - building/stanton-by-dale/wesleyan-chapel
-  - building/stanton-by-dale/cricket-ground
-  - building/stanton-by-dale/smithy
+- building/dale-road/chequers-inn
+- building/stanhope-street/stanhope-arms
+- building/stanhope-street/st-michaels
+- building/dale-road/wesleyan-chapel
+- building/main-street/cricket-ground
+- building/stanhope-street/smithy
 
 institutions:
   - institution/chequers-inn
   - institution/stanhope-arms
-  - institution/st-michael-and-all-angels-church
+  - institution/st-michaels
   - institution/wesleyan-chapel
-  - institution/stanton-cricket-club
+  - institution/cricket-club
   - institution/smithy
-  - institution/general-store          # to create later
-  - institution/sweet-shop             # to create later
-  - institution/wi                     # Women’s Institute – no building needed
-  - institution/parish-council         # if you choose to model it
+  - institution/womens-institute
 
 residents:
   - resident/w-michael

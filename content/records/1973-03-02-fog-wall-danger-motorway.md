@@ -3,7 +3,6 @@ title: "Tragic: Proof of fog wall danger to m-way proposals"
 date: 1973-03-02
 dateAdded: 2025-12-30
 
-streets: ["Stanton-by-Dale"]
 themes: ["motorway", "safety", "fog", "M42", "M1"]
 
 buildings: []
