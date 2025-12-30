@@ -39,6 +39,26 @@ def file_exists(content_dir, relative_path):
     full_path = content_dir / f"{relative_path}.md"
     return full_path.exists()
 
+# Expected fields for records/articles
+EXPECTED_ARTICLE_FIELDS = {
+    'title', 'date', 'dateAdded', 'sources', 'source', 'summary',
+    'residents', 'buildings', 'institutions', 
+    'tags', 'themes', 'street', 'resident_role',
+    'type', 'draft', 'layout',
+    'businesses',  # deprecated, should be 'institutions'
+    'categories',  # deprecated or alternative taxonomy
+    'event_date_note'  # additional context for dates
+}
+
+# Expected fields for institutions
+EXPECTED_INSTITUTION_FIELDS = {
+    'title', 'institution_type', 'type', 'location', 'dates',
+    'buildings', 'residents', 'notes', 'draft',
+    'operating_from', 'operating_to',  # date range fields
+    'aliases',  # alternative names
+    'premises'  # deprecated, should be 'buildings'
+}
+
 def validate_article(file_path, content_dir, errors, warnings):
     """Validate a single article's metadata."""
     relative_path = file_path.relative_to(content_dir)
@@ -47,6 +67,11 @@ def validate_article(file_path, content_dir, errors, warnings):
     if not frontmatter:
         errors.append(f"{relative_path}: No valid frontmatter found")
         return
+    
+    # Check for unexpected fields
+    for field in frontmatter.keys():
+        if field not in EXPECTED_ARTICLE_FIELDS:
+            errors.append(f"{relative_path}: Unexpected field '{field}'")
     
     # Check residents
     if 'residents' in frontmatter:
@@ -108,6 +133,12 @@ def validate_article(file_path, content_dir, errors, warnings):
             f"{relative_path}: Uses deprecated 'people' field, should use 'residents' instead"
         )
     
+    # Check for deprecated 'businesses' field
+    if 'businesses' in frontmatter:
+        warnings.append(
+            f"{relative_path}: Uses deprecated 'businesses' field, should use 'institutions' instead"
+        )
+    
     # Check required fields
     if 'title' not in frontmatter:
         errors.append(f"{relative_path}: Missing 'title' field")
@@ -132,6 +163,32 @@ def validate_article(file_path, content_dir, errors, warnings):
             f"{relative_path}: Has both 'source' and 'sources' fields, consolidate to 'sources'"
         )
 
+def validate_institution(file_path, content_dir, errors, warnings):
+    """Validate a single institution's metadata."""
+    relative_path = file_path.relative_to(content_dir)
+    frontmatter = extract_frontmatter(file_path)
+    
+    if not frontmatter:
+        errors.append(f"{relative_path}: No valid frontmatter found")
+        return
+    
+    # Check for unexpected fields
+    for field in frontmatter.keys():
+        if field not in EXPECTED_INSTITUTION_FIELDS:
+            errors.append(f"{relative_path}: Unexpected field '{field}'")
+    
+    # Check institution_type is set
+    if 'institution_type' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'institution_type' field")
+    elif not frontmatter['institution_type']:
+        errors.append(f"{relative_path}: 'institution_type' field is empty")
+    
+    # Check for deprecated 'premises' field
+    if 'premises' in frontmatter:
+        warnings.append(
+            f"{relative_path}: Uses deprecated 'premises' field, should use 'buildings' instead"
+        )
+
 def get_file_context(file_path, content_dir):
     """Get the frontmatter context of a file for LLM fixing."""
     frontmatter = extract_frontmatter(file_path)
@@ -147,16 +204,23 @@ def main():
     script_dir = Path(__file__).parent
     content_dir = script_dir / 'content'
     records_dir = content_dir / 'records'
+    institution_dir = content_dir / 'institution'
     
     if not records_dir.exists():
         print(f"{Colors.RED}❌ Records directory not found: {records_dir}{Colors.RESET}")
         sys.exit(1)
     
-    print(f"{Colors.BLUE}🔍 Validating metadata in all articles...{Colors.RESET}\n")
+    print(f"{Colors.BLUE}🔍 Validating metadata in all articles and institutions...{Colors.RESET}\n")
     
     # Get all markdown files
     article_files = list(records_dir.rglob('*.md'))
-    print(f"Found {len(article_files)} articles to validate\n")
+    print(f"Found {len(article_files)} articles to validate")
+    
+    institution_files = []
+    if institution_dir.exists():
+        institution_files = list(institution_dir.glob('*.md'))
+        print(f"Found {len(institution_files)} institutions to validate")
+    print()
     
     errors = []
     warnings = []
@@ -165,6 +229,10 @@ def main():
     # Validate each article
     for article_file in article_files:
         validate_article(article_file, content_dir, errors, warnings)
+    
+    # Validate each institution
+    for institution_file in institution_files:
+        validate_institution(institution_file, content_dir, errors, warnings)
     
     # Collect context for files with errors
     for error in errors:

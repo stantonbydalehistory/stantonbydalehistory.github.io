@@ -8,5 +8,5 @@ googleAnalytics = "G-P1Y8NME5YH"
 [taxonomies]
 street = "streets"
 theme = "themes"
-business_type = "business_types"
+institution_type = "institution_types"
 resident_role = "resident_roles"

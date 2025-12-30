@@ -1,9 +1,9 @@
 ---
 title: "Stanton-by-Dale Association for the Prosecution of Felons"
-business_type: "Association"
+institution_type: "Association"
 
-# Buildings (premises) where this business operates
-premises:
+# Buildings where this institution operates
+buildings:
   - building/stanhope-street/stanhope-arms
 
 # Key residents associated with the business

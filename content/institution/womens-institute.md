@@ -1,5 +1,6 @@
 ---
 title: "Stanton-by-Dale Women's Institute"
+institution_type: "Social Organization"
 type: "Social Organization"
 dates:
   established: ""

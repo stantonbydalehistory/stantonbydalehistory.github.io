@@ -8,7 +8,7 @@ themes: ["employment", "domestic service"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
+institutions:
   - institution/stanhope-arms
 
 residents:

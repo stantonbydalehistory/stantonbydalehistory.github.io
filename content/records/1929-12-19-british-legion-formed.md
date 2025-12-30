@@ -8,10 +8,8 @@ themes: ["community", "veterans", "organization"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
-  - institution/stanhope-arms
-
 institutions:
+  - institution/stanhope-arms
   - institution/british-legion
 
 residents: []

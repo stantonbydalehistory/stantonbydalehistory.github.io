@@ -40,55 +40,90 @@
 <hr>
 
 <h2>Residents connected with this building</h2>
-<ul>
+{{ $currentFile := .File.Path }}
+{{ $residents := slice }}
 
-  {{/* DIRECT residents assigned to this building */}}
-  {{ with .Params.residents }}
-    {{ range . }}
-      {{ with site.GetPage . }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-      {{ end }}
+{{/* DIRECT residents assigned to this building */}}
+{{ with .Params.residents }}
+  {{ range . }}
+    {{ with site.GetPage . }}
+      {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" "") }}
     {{ end }}
   {{ end }}
+{{ end }}
 
-  {{/* RESIDENTS via institutions inside this building */}}
-  {{ with .Params.institutions }}
-    {{ range . }}
-      {{ $inst := site.GetPage . }}
-      {{ if $inst }}
-        {{ range $inst.Params.residents }}
-          {{ with site.GetPage . }}
-            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> (via {{ $inst.Title }})</li>
-          {{ end }}
+{{/* RESIDENTS via institutions inside this building */}}
+{{ with .Params.institutions }}
+  {{ range . }}
+    {{ $inst := site.GetPage . }}
+    {{ if $inst }}
+      {{ range $inst.Params.residents }}
+        {{ with site.GetPage . }}
+          {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(via %s)" $inst.Title)) }}
         {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
+{{ end }}
 
-</ul>
+{{/* RESIDENTS from records that mention this building */}}
+{{ range where site.RegularPages "Section" "records" }}
+  {{ if in .Params.buildings $currentFile }}
+    {{ range .Params.residents }}
+      {{ with site.GetPage . }}
+        {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(from record: %s)" $.Title)) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $residents }}
+  <ul>
+    {{ range $residents }}
+      <li><a href="{{ .link }}">{{ .title }}</a> {{ .note }}</li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>No residents recorded at this building.</p>
+{{ end }}
 
 <hr>
 
 <h2>Historical Records</h2>
-<ul>
+{{ $currentFile := .File.Path }}
+{{ $records := slice }}
 
-  {{/* Records that reference THIS building explicitly */}}
-  {{ range where site.RegularPages "Params.buildings" "intersect" (slice .Path) }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+{{/* Records that reference THIS building explicitly */}}
+{{ range where site.RegularPages "Section" "records" }}
+  {{ if in .Params.buildings $currentFile }}
+    {{ $records = $records | append (dict "link" .RelPermalink "title" .Title "date" .Date "note" "") }}
   {{ end }}
+{{ end }}
 
-  {{/* Records that reference INSTITUTIONS in this building */}}
-  {{ with .Params.institutions }}
-    {{ range . }}
-      {{ $inst := site.GetPage . }}
-      {{ if $inst }}
-        {{ range where site.RegularPages "Params.institutions" "intersect" (slice $inst.Path) }}
-          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> (via {{ $inst.Title }})</li>
-        {{ end }}
+{{/* Records that reference INSTITUTIONS in this building */}}
+{{ with $.Params.institutions }}
+  {{ range . }}
+    {{ $instPath := . }}
+    {{ range where site.RegularPages "Section" "records" }}
+      {{ if in .Params.institutions $instPath }}
+        {{ $records = $records | append (dict "link" .RelPermalink "title" .Title "date" .Date "note" (printf "(via %s)" ($instPath | path.Base | humanize))) }}
       {{ end }}
     {{ end }}
   {{ end }}
+{{ end }}
 
-</ul>
+{{ if $records }}
+  <ul>
+    {{ range $records }}
+      <li>
+        <a href="{{ .link }}">{{ .title }}</a>
+        {{ with .date }} - {{ .Format "2 January 2006" }}{{ end }}
+        {{ .note }}
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>No historical records found for this building.</p>
+{{ end }}
 
 {{ end }}

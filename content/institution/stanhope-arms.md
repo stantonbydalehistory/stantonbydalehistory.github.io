@@ -1,9 +1,9 @@
 ---
 title: "Stanhope Arms"
-business_type: "Public House"
+institution_type: "Public House"
 
-# Buildings (premises) where this business operates
-premises:
+# Buildings where this institution operates
+buildings:
   - institution/stanton-by-dale/stanhope-arms
 
 # Key residents associated with the business

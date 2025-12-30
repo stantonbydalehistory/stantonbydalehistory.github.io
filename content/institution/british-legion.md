@@ -1,9 +1,9 @@
 ---
 title: "British Legion"
-business_type: "Veterans Organization"
+institution_type: "Veterans Organization"
 
-# Buildings (premises) where this business operates
-premises:
+# Buildings where this institution operates
+buildings:
   - building/stanhope-street/stanhope-arms
 
 # Key residents associated with the business

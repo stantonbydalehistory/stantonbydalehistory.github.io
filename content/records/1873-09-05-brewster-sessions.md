@@ -8,7 +8,7 @@ themes: ["licensing", "public house"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
+institutions:
   - institution/stanhope-arms
 
 residents:

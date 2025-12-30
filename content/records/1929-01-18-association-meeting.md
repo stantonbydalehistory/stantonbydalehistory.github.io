@@ -8,10 +8,8 @@ themes: ["crime", "community", "justice"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
-  - institution/stanhope-arms
-
 institutions:
+  - institution/stanhope-arms
   - institution/association-prosecution-felons
 
 residents:

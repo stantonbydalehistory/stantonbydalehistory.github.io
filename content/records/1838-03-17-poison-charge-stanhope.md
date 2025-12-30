@@ -8,7 +8,7 @@ themes: ["crime", "attempted murder", "poison"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
+institutions:
   - institution/stanhope-arms
 
 residents: []

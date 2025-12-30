@@ -10,10 +10,8 @@ buildings:
   - building/dale-road/rose-cottage
   - building/stanhope-street/st-michaels
 
-businesses:
-  - institution/stanhope-arms
-
 institutions:
+  - institution/stanhope-arms
   - institution/stanton-ironworks
 
 residents:

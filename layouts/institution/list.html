@@ -6,7 +6,7 @@
 
 <div class="content-section">
   {{ $pages := where site.RegularPages "Section" "institution" }}
-  {{ $pagesByType := $pages.GroupByParam "business_type" }}
+  {{ $pagesByType := $pages.GroupByParam "institution_type" }}
   
   {{ range $pagesByType }}
     <h2 style="margin-top: 2rem;">{{ if .Key }}{{ .Key }}{{ else }}Other{{ end }}</h2>

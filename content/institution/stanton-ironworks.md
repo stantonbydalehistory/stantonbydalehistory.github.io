@@ -1,9 +1,9 @@
 ---
 title: "Stanton Ironworks"
-business_type: "Ironworks"
+institution_type: "Ironworks"
 
-# Buildings (premises) where this business operates
-premises: []
+# Buildings where this institution operates
+buildings: []
 
 # Key residents associated with the business
 residents: []

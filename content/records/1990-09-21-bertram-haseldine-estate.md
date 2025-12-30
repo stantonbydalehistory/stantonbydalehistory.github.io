@@ -8,8 +8,6 @@ themes: ["death", "charity", "community"]
 buildings:
   - building/dale-road/chequers-inn
 
-businesses: []
-
 institutions:
   - institution/chequers-inn
 

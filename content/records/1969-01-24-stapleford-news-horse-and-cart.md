@@ -2,7 +2,6 @@
 title: "Where You Can Almost Expect to Find a Horse and Cart"
 date: 1969-01-24
 dateAdded: 2025-12-26
-       # smithy location
 
 themes:
   - village-history
@@ -13,12 +12,12 @@ themes:
   - recreation
 
 buildings:
-- building/dale-road/chequers-inn
-- building/stanhope-street/stanhope-arms
-- building/stanhope-street/st-michaels
-- building/dale-road/wesleyan-chapel
-- building/main-street/cricket-ground
-- building/stanhope-street/smithy
+  - building/dale-road/chequers-inn
+  - building/stanhope-street/stanhope-arms
+  - building/stanhope-street/st-michaels
+  - building/dale-road/wesleyan-chapel
+  - building/main-street/cricket-ground
+  - building/stanhope-street/smithy
 
 institutions:
   - institution/chequers-inn

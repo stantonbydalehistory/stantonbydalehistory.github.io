@@ -8,10 +8,8 @@ themes: ["crime", "assault", "drunkenness"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
-  - institution/stanhope-arms
-
 institutions:
+  - institution/stanhope-arms
   - institution/stanton-ironworks
 
 residents:

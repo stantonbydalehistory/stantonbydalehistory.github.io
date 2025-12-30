@@ -9,8 +9,8 @@ themes: ["crime", "theft"]
 buildings:
   - building/stanhope-street/stanhope-arms
 
-# Businesses in the village
-businesses:
+# Institutions in the village
+institutions:
   - institution/stanhope-arms
 
 # Residents in the village
