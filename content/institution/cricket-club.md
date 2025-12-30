@@ -1,6 +1,6 @@
 ---
 title: "Stanton-by-Dale Cricket Club"
-institution_type: "sports_club"
+institution_type: "sports"
 
 buildings:
   - building/stanton-by-dale/cricket-ground

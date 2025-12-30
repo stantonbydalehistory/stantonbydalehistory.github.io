@@ -59,6 +59,14 @@ EXPECTED_INSTITUTION_FIELDS = {
     'premises'  # deprecated, should be 'buildings'
 }
 
+# Valid institution types (enum)
+VALID_INSTITUTION_TYPES = {
+    'business',
+    'social',
+    'religious',
+    'sports'
+}
+
 def validate_article(file_path, content_dir, errors, warnings):
     """Validate a single article's metadata."""
     relative_path = file_path.relative_to(content_dir)
@@ -182,6 +190,15 @@ def validate_institution(file_path, content_dir, errors, warnings):
         errors.append(f"{relative_path}: Missing 'institution_type' field")
     elif not frontmatter['institution_type']:
         errors.append(f"{relative_path}: 'institution_type' field is empty")
+    else:
+        # Check institution_type is a valid value
+        institution_type = frontmatter['institution_type'].lower()
+        if institution_type not in VALID_INSTITUTION_TYPES:
+            valid_types = ', '.join(sorted([t.capitalize() for t in VALID_INSTITUTION_TYPES]))
+            errors.append(
+                f"{relative_path}: Invalid institution_type '{frontmatter['institution_type']}'. "
+                f"Must be one of: {valid_types}"
+            )
     
     # Check for deprecated 'premises' field
     if 'premises' in frontmatter:

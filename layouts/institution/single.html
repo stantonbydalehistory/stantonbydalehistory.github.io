@@ -1,10 +1,24 @@
 {{ define "main" }}
+
 <h1>{{ .Title }}</h1>
 
-<p>Type: {{ .Params.institution_type }}</p>
+<p>
+  Type: {{ .Params.institution_type | title }}<br>
+  {{ with .Params.operating_from }}Operating from: {{ . }}<br>{{ end }}
+  {{ with .Params.operating_to }}Operating to: {{ . }}<br>{{ end }}
+  {{ if and .Params.operating_from (not .Params.operating_to) }}Status: Active{{ end }}
+</p>
 
+{{ with .Params.notes }}
+  <p>{{ . }}</p>
+{{ end }}
+
+{{ .Content }}
+
+<hr>
+
+<h2>Buildings</h2>
 {{ with .Params.buildings }}
-  <h2>Building</h2>
   <ul>
     {{ range . }}
       {{ with site.GetPage . }}
@@ -12,10 +26,14 @@
       {{ end }}
     {{ end }}
   </ul>
+{{ else }}
+  <p>No buildings recorded for this institution.</p>
 {{ end }}
 
+<hr>
+
+<h2>Associated Residents</h2>
 {{ with .Params.residents }}
-  <h2>Associated Residents</h2>
   <ul>
     {{ range . }}
       {{ with site.GetPage . }}
@@ -23,12 +41,34 @@
       {{ end }}
     {{ end }}
   </ul>
+{{ else }}
+  <p>No residents directly associated with this institution.</p>
 {{ end }}
 
-<h2>Related Records</h2>
-<ul>
-  {{ range where site.RegularPages "Params.institutions" "intersect" (slice .File.Path) }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+<hr>
+
+<h2>Historical Records</h2>
+{{ $currentFile := .File.Path }}
+{{ $records := slice }}
+
+{{/* Find all records that reference this institution */}}
+{{ range where site.RegularPages "Section" "records" }}
+  {{ if in .Params.institutions $currentFile }}
+    {{ $records = $records | append . }}
   {{ end }}
-</ul>
+{{ end }}
+
+{{ if $records }}
+  <ul>
+    {{ range sort $records "Date" }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Date }} - {{ .Format "2 January 2006" }}{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>No historical records found for this institution.</p>
+{{ end }}
+
 {{ end }}

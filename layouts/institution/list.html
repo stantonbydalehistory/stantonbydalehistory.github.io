@@ -9,7 +9,7 @@
   {{ $pagesByType := $pages.GroupByParam "institution_type" }}
   
   {{ range $pagesByType }}
-    <h2 style="margin-top: 2rem;">{{ if .Key }}{{ .Key }}{{ else }}Other{{ end }}</h2>
+    <h2 style="margin-top: 2rem;">{{ if .Key }}{{ .Key | title }}{{ else }}Other{{ end }}</h2>
     <ul>
       {{ range .Pages }}
         <li style="margin-bottom: 1rem;">

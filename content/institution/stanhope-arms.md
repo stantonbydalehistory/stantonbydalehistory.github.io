@@ -1,6 +1,6 @@
 ---
 title: "Stanhope Arms"
-institution_type: "Public House"
+institution_type: "business"
 
 # Buildings where this institution operates
 buildings:

@@ -1,6 +1,6 @@
 ---
 title: "Wesleyan Chapel"
-institution_type: "chapel"
+institution_type: "religious"
 
 buildings:
   - building/dale-road/wesleyan-chapel

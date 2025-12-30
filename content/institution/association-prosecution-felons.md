@@ -1,6 +1,6 @@
 ---
 title: "Stanton-by-Dale Association for the Prosecution of Felons"
-institution_type: "Association"
+institution_type: "social"
 
 # Buildings where this institution operates
 buildings:

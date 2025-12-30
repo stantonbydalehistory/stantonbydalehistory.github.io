@@ -1,6 +1,6 @@
 ---
 title: "St Michael and All Angels Church"
-institution_type: "church"
+institution_type: "religious"
 
 buildings:
   - building/stanton-by-dale/st-michael-and-all-angels-church

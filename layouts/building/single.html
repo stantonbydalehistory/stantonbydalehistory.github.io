@@ -28,7 +28,7 @@
       {{ with site.GetPage . }}
         <li>
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          {{ with .Params.institution_type }} ({{ . }}){{ end }}
+          {{ with .Params.institution_type }} ({{ . | title }}){{ end }}
         </li>
       {{ end }}
     {{ end }}

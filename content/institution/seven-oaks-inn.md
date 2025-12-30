@@ -1,6 +1,6 @@
 ---
 title: "Seven Oaks Inn"
-institution_type: "Public House"
+institution_type: "business"
 type: "pub"
 location: "Stanton-by-Dale"
 dates:

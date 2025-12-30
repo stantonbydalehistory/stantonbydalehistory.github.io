@@ -1,6 +1,6 @@
 ---
 title: "Stanton Ironworks"
-institution_type: "Ironworks"
+institution_type: "business"
 
 # Buildings where this institution operates
 buildings: []

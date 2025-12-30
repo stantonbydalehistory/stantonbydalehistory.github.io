@@ -1,6 +1,6 @@
 ---
 title: "Chequers Inn"
-institution_type: "public_house"
+institution_type: "business"
 
 buildings:
   - building/stanton-by-dale/chequers-inn

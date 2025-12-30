@@ -1,6 +1,6 @@
 ---
 title: "Smithy"
-institution_type: "smithy"
+institution_type: "business"
 
 buildings:
   - building/stanton-by-dale/smithy

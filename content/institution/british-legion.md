@@ -1,6 +1,6 @@
 ---
 title: "British Legion"
-institution_type: "Veterans Organization"
+institution_type: "social"
 
 # Buildings where this institution operates
 buildings:
