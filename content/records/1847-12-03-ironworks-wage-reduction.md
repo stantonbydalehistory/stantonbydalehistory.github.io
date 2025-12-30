@@ -1,6 +1,7 @@
 ---
 title: "Stanton-by-Dale Iron Works - Wage Reduction"
 date: 1847-12-03
+dateAdded: 2025-12-26
 
 themes: ["industry", "employment", "economics", "labor"]
 

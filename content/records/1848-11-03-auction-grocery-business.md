@@ -1,6 +1,7 @@
 ---
 title: "Auction of Grocery Business at Stanton-by-Dale"
 date: 1848-11-03
+dateAdded: 2025-12-26
 
 themes: ["business", "property", "auction"]
 

@@ -1,6 +1,7 @@
 ---
 title: "Poaching Case Dismissed at Dale Abbey"
 date: 1831-07-28
+dateAdded: 2025-12-26
 
 themes: ["crime", "poaching", "gamekeeper"]
 

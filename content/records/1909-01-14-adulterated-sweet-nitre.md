@@ -1,6 +1,7 @@
 ---
 title: "Adulterated Sweet Nitre Sold at Stanton-by-Dale"
 date: 1909-01-14
+dateAdded: 2025-12-27
 
 themes: ["crime", "health", "retail"]
 

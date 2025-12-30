@@ -1,6 +1,7 @@
 ---
 title: "Charge of Administering Poison at Stanhope Arms"
 date: 1838-03-17
+dateAdded: 2025-12-26
 
 themes: ["crime", "attempted murder", "poison"]
 

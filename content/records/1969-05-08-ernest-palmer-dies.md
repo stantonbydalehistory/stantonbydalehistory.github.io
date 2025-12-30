@@ -1,6 +1,7 @@
 ---
 title: "Licensee Dies Month After Retirement"
 date: 1969-05-08
+dateAdded: 2025-12-26
 
 themes: ["death", "community", "pub life"]
 

@@ -1,6 +1,7 @@
 ---
 title: "Earl Stanhope's Rent-Day at Stanhope Arms"
 date: 1831-07-28
+dateAdded: 2025-12-26
 
 themes: ["property", "landlord", "estate management"]
 

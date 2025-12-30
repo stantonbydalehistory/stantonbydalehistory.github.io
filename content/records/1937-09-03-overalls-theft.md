@@ -1,6 +1,7 @@
 ---
 title: "Overalls Missing: Long Eaton Man Accused of Theft"
 date: 1937-09-03
+dateAdded: 2025-12-27
 
 themes: ["crime", "theft"]
 

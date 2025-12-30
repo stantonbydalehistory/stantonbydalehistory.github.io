@@ -1,6 +1,7 @@
 ---
 title: "Public-House Disturbance at Stanhope Arms"
 date: 1873-05-31
+dateAdded: 2025-12-26
 
 themes: ["crime", "drunkenness"]
 

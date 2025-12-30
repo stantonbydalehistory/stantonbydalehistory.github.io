@@ -1,6 +1,7 @@
 ---
 title: "Let Off: Drunkenness at Stanton-by-Dale"
 date: 1914-08-07
+dateAdded: 2025-12-27
 
 themes: ["crime", "drunkenness"]
 

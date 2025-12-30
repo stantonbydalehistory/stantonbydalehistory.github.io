@@ -1,6 +1,7 @@
 ---
 title: "Stanton and Dale Abbey—Contributions to Constantinople Church Fund"
 date: 1856-05-23
+dateAdded: 2025-12-30
 
 themes: ["church", "charity", "fundraising"]
 

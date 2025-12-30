@@ -1,6 +1,7 @@
 ---
 title: "Hedley Keeps Up the Family Tradition at Stanhope Arms"
 date: 1986-06-06
+dateAdded: 2025-12-26
 
 themes: ["business", "community", "pub life"]
 

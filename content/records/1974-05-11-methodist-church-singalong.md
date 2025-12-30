@@ -1,6 +1,7 @@
 ---
 title: "Stanton-by-Dale Methodist Church Sankey Singalong"
 date: 1974-05-11
+dateAdded: 2025-12-26
 
 themes: ["community", "church", "fundraising", "music"]
 

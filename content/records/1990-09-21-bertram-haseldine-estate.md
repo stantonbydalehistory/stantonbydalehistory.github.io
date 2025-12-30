@@ -1,6 +1,7 @@
 ---
 title: "Charities Benefit from Local Wills - Bertram Haseldine"
 date: 1990-09-21
+dateAdded: 2025-12-26
 
 themes: ["death", "charity", "community"]
 

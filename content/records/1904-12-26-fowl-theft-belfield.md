@@ -1,6 +1,7 @@
 ---
 title: "Alleged Theft of Fowls at Stanton-by-Dale"
 date: 1890-11-26
+dateAdded: 2025-12-26
 
 streets: ["Stanton-by-Dale"]
 themes: ["crime", "theft"]

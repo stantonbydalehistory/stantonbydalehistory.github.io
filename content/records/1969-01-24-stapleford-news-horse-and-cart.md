@@ -1,6 +1,7 @@
 ---
 title: "Where You Can Almost Expect to Find a Horse and Cart"
 date: 1969-01-24
+dateAdded: 2025-12-26
        # smithy location
 
 themes:

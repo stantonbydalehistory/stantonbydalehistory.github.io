@@ -1,6 +1,7 @@
 ---
 title: "Stanton-by-Dale Ex-service Men's Decision to Form British Legion Branch"
 date: 1929-12-19
+dateAdded: 2025-12-26
 
 themes: ["community", "veterans", "organization"]
 

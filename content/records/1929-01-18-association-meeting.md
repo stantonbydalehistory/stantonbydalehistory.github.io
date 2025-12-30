@@ -1,6 +1,7 @@
 ---
 title: "Annual Meeting of Association for Prosecution of Felons"
 date: 1929-01-18
+dateAdded: 2025-12-26
 
 themes: ["crime", "community", "justice"]
 

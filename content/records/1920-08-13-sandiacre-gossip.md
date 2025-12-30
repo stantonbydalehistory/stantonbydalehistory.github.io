@@ -1,6 +1,7 @@
 ---
 title: "Sandiacre & Stapleford Gossip: Local Industries and History"
 date: 1920-08-13
+dateAdded: 2025-12-27
 
 themes: ["industry", "social history", "community"]
 

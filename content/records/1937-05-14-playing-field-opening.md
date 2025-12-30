@@ -1,6 +1,7 @@
 ---
 title: "Firm's Gift to Village of Stanton: New Playing Field Opened"
 date: 1937-05-14
+dateAdded: 2025-12-27
 
 themes: ["community", "recreation", "sports", "ironworks"]
 

@@ -1,6 +1,7 @@
 ---
 title: "Public-House Row at the Stanhope Arms"
 date: 1889-08-30   # exact date not given, only 'Thursday'—you can fill in once known
+dateAdded: 2025-12-26
 
 streets: ["Stanton-by-Dale"]
 themes: ["crime", "drunkenness", "assault"]

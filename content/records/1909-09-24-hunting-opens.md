@@ -1,6 +1,7 @@
 ---
 title: "Hunting Opens: Earl of Harrington's Hounds"
 date: 1909-09-24
+dateAdded: 2025-12-27
 
 themes: ["sport", "hunting", "countryside"]
 

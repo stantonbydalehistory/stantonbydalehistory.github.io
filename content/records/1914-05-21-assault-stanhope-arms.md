@@ -1,6 +1,7 @@
 ---
 title: "Ex-Soldier Assaults Landlord at Stanhope Arms"
 date: 1914-05-21
+dateAdded: 2025-12-26
 
 themes: ["crime", "assault", "drunkenness"]
 

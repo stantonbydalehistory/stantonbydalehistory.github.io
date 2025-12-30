@@ -1,6 +1,7 @@
 ---
 title: "Peeping Youths Bound Over"
 date: 1967-04-14
+dateAdded: 2025-12-26
 
 themes: ["crime", "youth"]
 

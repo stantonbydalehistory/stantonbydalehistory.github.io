@@ -1,6 +1,7 @@
 ---
 title: "Designation of Conservation Area at Stanton by Dale"
 date: 1978-09-08
+dateAdded: 2025-12-26
 
 themes: ["conservation", "planning", "heritage"]
 

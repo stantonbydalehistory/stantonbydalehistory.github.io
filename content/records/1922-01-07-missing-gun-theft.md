@@ -1,6 +1,7 @@
 ---
 title: "A Missing Gun"
 date: 1922-01-07
+dateAdded: 2025-12-27
 
 themes: ["crime", "theft"]
 

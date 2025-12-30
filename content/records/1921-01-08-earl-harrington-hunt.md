@@ -1,6 +1,7 @@
 ---
 title: "Earl Harrington's Hunt: A Splendid Gallop from Hopwell"
 date: 1921-01-08
+dateAdded: 2025-12-27
 
 themes: ["sport", "hunting", "countryside"]
 

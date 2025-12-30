@@ -1,6 +1,7 @@
 ---
 title: "After Life's Work He Has Something Concrete to Show - F. B. Cornelius"
 date: 1956-03-23
+dateAdded: 2025-12-26
 
 themes: ["retirement", "industry", "community", "engineering"]
 

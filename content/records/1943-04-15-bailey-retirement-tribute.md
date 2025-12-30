@@ -1,6 +1,7 @@
 ---
 title: "Retiring After 36 Years In Constabulary"
 date: 1943-04-15
+dateAdded: 2025-12-27
 
 themes: ["police", "retirement"]
 

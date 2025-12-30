@@ -1,6 +1,7 @@
 ---
 title: "Inquest on William Grundy at Stanhope Arms"
 date: 1860-11-30
+dateAdded: 2025-12-26
 
 themes: ["death", "inquest", "farming"]
 

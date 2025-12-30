@@ -1,6 +1,7 @@
 ---
 title: "Chapel Change"
 date: 1999-12-08
+dateAdded: 2025-12-27
 
 themes: ["religion", "planning", "community"]
 

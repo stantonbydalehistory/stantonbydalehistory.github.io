@@ -1,6 +1,7 @@
 ---
 title: "A Belgian Refugee in Trouble at Stanton"
 date: 1916-01-06
+dateAdded: 2025-12-26
 
 themes: ["crime", "WWI", "refugees"]
 

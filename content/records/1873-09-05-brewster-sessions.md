@@ -1,6 +1,7 @@
 ---
 title: "Heanor Brewster Sessions - Licensed Victuallers' Licenses"
 date: 1873-09-05
+dateAdded: 2025-12-26
 
 themes: ["licensing", "public house"]
 

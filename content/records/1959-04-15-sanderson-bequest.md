@@ -1,6 +1,7 @@
 ---
 title: "Bequests by clergyman—left £13,024"
 date: 1959-04-15
+dateAdded: 2025-12-27
 
 themes: ["church", "clergy", "bequest"]
 

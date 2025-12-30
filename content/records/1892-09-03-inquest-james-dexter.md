@@ -1,6 +1,7 @@
 ---
 title: "A Visitation from God - Inquest on James Dexter"
 date: 1892-09-03
+dateAdded: 2025-12-26
 
 streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["death", "inquest", "farming"]

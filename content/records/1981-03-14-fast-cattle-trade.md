@@ -1,6 +1,7 @@
 ---
 title: "Fast Cattle Trade Yields High Prices"
 date: 1981-03-14
+dateAdded: 2025-12-27
 
 themes: ["agriculture", "livestock", "market"]
 

@@ -1,6 +1,7 @@
 ---
 title: "Drunkenness at Stanhope Arms"
 date: 1873-05-30
+dateAdded: 2025-12-26
 
 themes: ["crime", "drunkenness"]
 

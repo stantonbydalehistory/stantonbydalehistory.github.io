@@ -1,6 +1,7 @@
 ---
 title: "Coal for Stanton and Dale"
 date: 1912-03-22
+dateAdded: 2025-12-27
 
 themes: ["mining", "coal", "industry", "community"]
 

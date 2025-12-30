@@ -1,6 +1,7 @@
 ---
 title: "Overalls Stolen: Long Eaton Man Placed on Probation"
 date: 1937-09-09
+dateAdded: 2025-12-27
 
 themes: ["crime", "theft"]
 

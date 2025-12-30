@@ -5,6 +5,10 @@
   <div class="metadata">
     <p><strong>📅 Date:</strong> <span class="date">{{ .Date.Format "2 January 2006" }}</span></p>
     
+    {{ with .Params.dateAdded }}
+      <p><strong>📌 Added to archive:</strong> <span class="date">{{ . }}</span></p>
+    {{ end }}
+    
     {{ with .Params.streets }}
       <p><strong>📍 Location:</strong> {{ delimit . ", " }}</p>
     {{ end }}

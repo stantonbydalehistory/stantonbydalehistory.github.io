@@ -1,6 +1,7 @@
 ---
 title: "Nearly 90 Years in One House: Recollections of Stanton's Oldest Resident"
 date: 1920-03-19
+dateAdded: 2025-12-27
 
 themes: ["agriculture", "community", "social history", "biography"]
 
