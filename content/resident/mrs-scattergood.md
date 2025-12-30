@@ -7,7 +7,7 @@ roles:
 birth: null
 death: null
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 buildings:
   - building/stanhope-street/stanhope-arms
 notes: "Wife of Richard Scattergood, landlord of the Stanhope Arms in Stanton-by-Dale in the late 19th century. Advertised for a general servant in 1889."

@@ -2,14 +2,13 @@
 title: "Inquest on William Grundy at Stanhope Arms"
 date: 1860-11-30
 
-streets: ["Stanton-by-Dale"]
 themes: ["death", "inquest", "farming"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents: []
 

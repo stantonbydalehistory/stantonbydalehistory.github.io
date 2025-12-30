@@ -2,14 +2,13 @@
 title: "Earl Stanhope's Rent-Day at Stanhope Arms"
 date: 1831-07-28
 
-streets: ["Stanton-by-Dale"]
 themes: ["property", "landlord", "estate management"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
-businesses:
-  - business/stanhope-arms
+institutions:
+  - institution/stanhope-arms
 
 residents:
   - resident/philip-henry-stanhope-4th-earl

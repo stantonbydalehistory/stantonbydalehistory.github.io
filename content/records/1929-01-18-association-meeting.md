@@ -2,14 +2,13 @@
 title: "Annual Meeting of Association for Prosecution of Felons"
 date: 1929-01-18
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "community", "justice"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 institutions:
   - institution/association-prosecution-felons

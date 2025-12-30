@@ -7,11 +7,11 @@ themes: ["crime", "theft"]
 
 # Buildings in the village
 buildings:
-  - institution/stanton-by-dale/stanhope-arms
+  - institution//stanhope-arms
 
 # Businesses in the village
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 # Residents in the village
 residents:

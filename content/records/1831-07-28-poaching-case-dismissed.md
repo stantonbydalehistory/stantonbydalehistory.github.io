@@ -2,7 +2,6 @@
 title: "Poaching Case Dismissed at Dale Abbey"
 date: 1831-07-28
 
-streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["crime", "poaching", "gamekeeper"]
 
 residents:

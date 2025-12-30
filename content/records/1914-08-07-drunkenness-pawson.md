@@ -2,7 +2,6 @@
 title: "Let Off: Drunkenness at Stanton-by-Dale"
 date: 1914-08-07
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "drunkenness"]
 
 buildings: []

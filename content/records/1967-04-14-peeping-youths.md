@@ -2,7 +2,6 @@
 title: "Peeping Youths Bound Over"
 date: 1967-04-14
 
-streets: ["Stanton-by-Dale", "Dale Road"]
 themes: ["crime", "youth"]
 
 buildings: []

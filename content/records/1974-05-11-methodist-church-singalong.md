@@ -2,7 +2,6 @@
 title: "Stanton-by-Dale Methodist Church Sankey Singalong"
 date: 1974-05-11
 
-streets: ["Stanton-by-Dale"]
 themes: ["community", "church", "fundraising", "music"]
 
 buildings:

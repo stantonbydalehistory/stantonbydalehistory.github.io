@@ -2,7 +2,6 @@
 title: "Licensee Dies Month After Retirement"
 date: 1969-05-08
 
-streets: ["Stanton-by-Dale", "Dale Road", "Lows Lane"]
 themes: ["death", "community", "pub life"]
 
 buildings:
@@ -11,7 +10,7 @@ buildings:
   - building/stanhope-street/st-michaels
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 institutions:
   - institution/stanton-ironworks

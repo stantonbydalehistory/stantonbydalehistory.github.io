@@ -2,14 +2,13 @@
 title: "Hedley Keeps Up the Family Tradition at Stanhope Arms"
 date: 1986-06-06
 
-streets: ["Stanton-by-Dale"]
 themes: ["business", "community", "pub life"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents:
   - resident/hedley-horsfield

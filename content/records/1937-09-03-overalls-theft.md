@@ -2,7 +2,6 @@
 title: "Overalls Missing: Long Eaton Man Accused of Theft"
 date: 1937-09-03
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "theft"]
 
 buildings: []

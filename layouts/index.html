@@ -27,7 +27,9 @@
     <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">Historic structures and landmarks</p>
     <ul>
       {{ range first 8 (where site.RegularPages "Section" "building") }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ if .Title }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
       {{ end }}
     </ul>
     <p style="text-align: right; margin-top: 1rem;"><a href="/building/">View all buildings →</a></p>
@@ -38,7 +40,9 @@
     <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">Village organizations and businesses</p>
     <ul>
       {{ range first 8 (where site.RegularPages "Section" "institution") }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ if .Title }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
       {{ end }}
     </ul>
     <p style="text-align: right; margin-top: 1rem;"><a href="/institution/">View all institutions →</a></p>
@@ -49,7 +53,9 @@
     <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">People who shaped our community</p>
     <ul>
       {{ range first 8 (where site.RegularPages "Section" "resident") }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ if .Title }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
       {{ end }}
     </ul>
     <p style="text-align: right; margin-top: 1rem;"><a href="/resident/">View all residents →</a></p>

@@ -2,7 +2,6 @@
 title: "Adulterated Sweet Nitre Sold at Stanton-by-Dale"
 date: 1909-01-14
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "health", "retail"]
 
 buildings: []

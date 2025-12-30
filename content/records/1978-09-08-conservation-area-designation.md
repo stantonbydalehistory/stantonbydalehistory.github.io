@@ -2,7 +2,6 @@
 title: "Designation of Conservation Area at Stanton by Dale"
 date: 1978-09-08
 
-streets: ["Stanton-by-Dale", "Flake Lane", "Dale Road", "Quarry Hill", "Park Close", "Bowling Close"]
 themes: ["conservation", "planning", "heritage"]
 
 buildings:

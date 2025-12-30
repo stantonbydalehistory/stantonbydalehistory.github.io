@@ -2,7 +2,6 @@
 title: "Sandiacre & Stapleford Gossip: Local Industries and History"
 date: 1920-08-13
 
-streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["industry", "social history", "community"]
 
 buildings:

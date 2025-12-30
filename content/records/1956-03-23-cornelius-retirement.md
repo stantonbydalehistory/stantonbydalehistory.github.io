@@ -2,7 +2,6 @@
 title: "After Life's Work He Has Something Concrete to Show - F. B. Cornelius"
 date: 1956-03-23
 
-streets: ["Stanton-by-Dale"]
 themes: ["retirement", "industry", "community", "engineering"]
 
 buildings: []

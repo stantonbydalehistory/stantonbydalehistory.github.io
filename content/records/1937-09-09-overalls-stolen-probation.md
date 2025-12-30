@@ -2,7 +2,6 @@
 title: "Overalls Stolen: Long Eaton Man Placed on Probation"
 date: 1937-09-09
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "theft"]
 
 buildings: []

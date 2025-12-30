@@ -2,14 +2,13 @@
 title: "A Belgian Refugee in Trouble at Stanton"
 date: 1916-01-06
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "WWI", "refugees"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 institutions:
   - institution/stanton-ironworks

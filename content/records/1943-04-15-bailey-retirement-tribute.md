@@ -2,7 +2,6 @@
 title: "Retiring After 36 Years In Constabulary"
 date: 1943-04-15
 
-streets: ["Stanton-by-Dale"]
 themes: ["police", "retirement"]
 
 buildings: []

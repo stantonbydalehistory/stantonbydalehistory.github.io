@@ -1,9 +1,7 @@
 ---
 title: "Where You Can Almost Expect to Find a Horse and Cart"
 date: 1969-01-24
-
-streets:
-  - "Stanhope Street"        # smithy location
+       # smithy location
 
 themes:
   - village-history

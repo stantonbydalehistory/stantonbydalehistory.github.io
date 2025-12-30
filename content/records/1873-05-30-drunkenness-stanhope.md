@@ -2,14 +2,10 @@
 title: "Drunkenness at Stanhope Arms"
 date: 1873-05-30
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "drunkenness"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
-
-businesses:
-  - business/stanhope-arms
 
 institutions:
   - institution/stanton-ironworks

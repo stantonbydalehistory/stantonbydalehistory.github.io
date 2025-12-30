@@ -2,7 +2,6 @@
 title: "A Missing Gun"
 date: 1922-01-07
 
-streets: ["Dale Abbey"]
 themes: ["crime", "theft"]
 
 buildings: []

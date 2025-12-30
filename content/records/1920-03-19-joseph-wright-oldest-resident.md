@@ -2,7 +2,6 @@
 title: "Nearly 90 Years in One House: Recollections of Stanton's Oldest Resident"
 date: 1920-03-19
 
-streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["agriculture", "community", "social history", "biography"]
 
 buildings: []

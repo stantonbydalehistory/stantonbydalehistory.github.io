@@ -2,7 +2,6 @@
 title: "Fast Cattle Trade Yields High Prices"
 date: 1981-03-14
 
-streets: ["Dale Abbey"]
 themes: ["agriculture", "livestock", "market"]
 
 buildings: []

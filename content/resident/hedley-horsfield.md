@@ -9,7 +9,7 @@ roles:
 birth: null
 death: null
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 buildings:
   - building/stanhope-street/stanhope-arms
 notes: "Landlord of the Stanhope Arms from around 1975. Trained as an engineer and worked in Stapleford before taking on his first pub. Married to Brenda Horsfield."

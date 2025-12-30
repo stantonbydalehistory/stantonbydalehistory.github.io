@@ -2,7 +2,6 @@
 title: "Hunting Opens: Earl of Harrington's Hounds"
 date: 1909-09-24
 
-streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["sport", "hunting", "countryside"]
 
 buildings: []

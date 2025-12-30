@@ -2,7 +2,6 @@
 title: "Coal for Stanton and Dale"
 date: 1912-03-22
 
-streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["mining", "coal", "industry", "community"]
 
 buildings:

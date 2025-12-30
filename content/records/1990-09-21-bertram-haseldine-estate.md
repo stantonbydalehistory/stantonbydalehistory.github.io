@@ -2,7 +2,6 @@
 title: "Charities Benefit from Local Wills - Bertram Haseldine"
 date: 1990-09-21
 
-streets: ["Stanton-by-Dale"]
 themes: ["death", "charity", "community"]
 
 buildings:

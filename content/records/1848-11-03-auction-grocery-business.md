@@ -2,14 +2,13 @@
 title: "Auction of Grocery Business at Stanton-by-Dale"
 date: 1848-11-03
 
-streets: ["Stanton-by-Dale"]
 themes: ["business", "property", "auction"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents:
   - resident/richard-scattergood

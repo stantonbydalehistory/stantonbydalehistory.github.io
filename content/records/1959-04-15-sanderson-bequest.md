@@ -2,7 +2,6 @@
 title: "Bequests by clergyman—left £13,024"
 date: 1959-04-15
 
-streets: ["Stanton-by-Dale"]
 themes: ["church", "clergy", "bequest"]
 
 buildings: []

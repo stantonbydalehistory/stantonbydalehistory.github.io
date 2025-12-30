@@ -2,14 +2,13 @@
 title: "Heanor Brewster Sessions - Licensed Victuallers' Licenses"
 date: 1873-09-05
 
-streets: ["Stanton-by-Dale", "Dale Abbey"]
 themes: ["licensing", "public house"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents:
   - resident/mrs-plackett

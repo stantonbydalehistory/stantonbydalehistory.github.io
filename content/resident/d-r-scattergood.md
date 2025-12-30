@@ -9,7 +9,7 @@ roles:
 birth: null
 death: null
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 buildings:
   - building/stanhope-street/stanhope-arms
 notes: "Landlord of the Stanhope Arms in Stanton-by-Dale during World War I (around 1916). A different person from Richard Scattergood who kept the pub in the 1870s-1890s."

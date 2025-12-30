@@ -7,7 +7,7 @@ roles:
 birth: null
 death: null
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 buildings:
   - institution/stanton-by-dale/stanhope-arms
 notes: "Owner of the Stanhope Arms in Stanton-by-Dale."

@@ -2,14 +2,13 @@
 title: "Ex-Soldier Assaults Landlord at Stanhope Arms"
 date: 1914-05-21
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "assault", "drunkenness"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 institutions:
   - institution/stanton-ironworks

@@ -2,14 +2,13 @@
 title: "Stanton-by-Dale Ex-service Men's Decision to Form British Legion Branch"
 date: 1929-12-19
 
-streets: ["Stanton-by-Dale"]
 themes: ["community", "veterans", "organization"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 institutions:
   - institution/british-legion

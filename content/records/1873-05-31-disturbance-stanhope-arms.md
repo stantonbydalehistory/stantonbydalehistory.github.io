@@ -2,14 +2,13 @@
 title: "Public-House Disturbance at Stanhope Arms"
 date: 1873-05-31
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "drunkenness"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents:
   - resident/richard-scattergood

@@ -9,7 +9,7 @@ roles:
 birth: null
 death: 1969-05-08
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 buildings:
   - building/lows-lane/seven-oaks-inn
   - building/dale-road/rose-cottage

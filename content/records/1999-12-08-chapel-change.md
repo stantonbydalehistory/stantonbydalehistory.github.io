@@ -2,7 +2,6 @@
 title: "Chapel Change"
 date: 1999-12-08
 
-streets: ["Dale Road"]
 themes: ["religion", "planning", "community"]
 
 buildings:

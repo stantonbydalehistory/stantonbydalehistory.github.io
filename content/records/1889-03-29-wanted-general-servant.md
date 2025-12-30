@@ -9,7 +9,7 @@ buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents:
   - resident/mrs-scattergood

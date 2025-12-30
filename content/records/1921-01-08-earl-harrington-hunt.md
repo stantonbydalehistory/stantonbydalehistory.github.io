@@ -2,7 +2,6 @@
 title: "Earl Harrington's Hunt: A Splendid Gallop from Hopwell"
 date: 1921-01-08
 
-streets: ["Stanton-by-Dale"]
 themes: ["sport", "hunting", "countryside"]
 
 buildings: []

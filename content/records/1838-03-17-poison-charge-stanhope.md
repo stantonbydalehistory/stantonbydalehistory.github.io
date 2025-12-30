@@ -2,14 +2,13 @@
 title: "Charge of Administering Poison at Stanhope Arms"
 date: 1838-03-17
 
-streets: ["Stanton-by-Dale"]
 themes: ["crime", "attempted murder", "poison"]
 
 buildings:
   - building/stanhope-street/stanhope-arms
 
 businesses:
-  - business/stanhope-arms
+  - institution/stanhope-arms
 
 residents: []
 

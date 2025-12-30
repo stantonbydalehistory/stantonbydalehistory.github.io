@@ -2,7 +2,6 @@
 title: "Firm's Gift to Village of Stanton: New Playing Field Opened"
 date: 1937-05-14
 
-streets: ["Stanton-by-Dale", "Dale Road"]
 themes: ["community", "recreation", "sports", "ironworks"]
 
 buildings:
