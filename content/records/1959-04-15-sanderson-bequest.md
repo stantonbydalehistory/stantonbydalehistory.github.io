@@ -11,7 +11,11 @@ institutions:
   - institution/st-michaels
 
 residents:
-  - resident/finlay-sanderson
+  - resident/rev-finlay-sanderson
+
+person_institution_links:
+  resident/rev-finlay-sanderson:
+    - institution/st-michaels
 
 sources:
   - type: "newspaper"

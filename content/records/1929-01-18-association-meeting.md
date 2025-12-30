@@ -15,6 +15,14 @@ institutions:
 residents:
   - resident/richard-scattergood
 
+person_building_links:
+  resident/richard-scattergood:
+    - building/stanhope-street/stanhope-arms
+
+person_institution_links:
+  resident/richard-scattergood:
+    - institution/stanhope-arms
+
 sources:
   - type: "newspaper"
     title: "Derby and Chesterfield Reporter"

@@ -1,7 +1,6 @@
 ---
 title: "Rev. H. E. Kewley"
 role: ["Rector"]
-institution: ["St. Michael's Church"]
 dates:
   active: "1920s"
 ---

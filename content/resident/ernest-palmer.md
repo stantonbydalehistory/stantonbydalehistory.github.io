@@ -8,12 +8,6 @@ roles:
   - ironworker
 birth: null
 death: 1969-05-08
-businesses:
-  - institution/stanhope-arms
-buildings:
-  - building/lows-lane/seven-oaks-inn
-  - building/dale-road/rose-cottage
-notes: "Former licensee of the Seven Oaks Inn for 11 years. Worked at Stanton Ironworks for many years. Played cricket and bowls for the works' teams. Member of Erewash Valley Golf Club. Died aged 69, only a month after retirement. Married to Violet Palmer."
 ---
 
 Ernest Palmer was a well-known figure in Stanton-by-Dale. He worked at the Stanton Ironworks for many years and was licensee of the Seven Oaks Inn, located in the centre of the ironworks, for 11 years before his retirement.

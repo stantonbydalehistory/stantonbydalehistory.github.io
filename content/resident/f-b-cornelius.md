@@ -10,9 +10,6 @@ roles:
   - home-guard
 birth: null
 death: null
-businesses: []
-buildings: []
-notes: "General manager of Stanton Ironworks concrete pipe plant. Worked at the company for 54 years before retiring in March 1956. Designed pre-stressed concrete railway sleepers during WWII and concrete rocket heads. Founded Stanton Home Guard in 1940 (the county's first). President of Stanton-by-Dale British Legion and founder-member. Chairman of Stanton Ironworks National Savings Committee. Made a Serving Brother of the Order of St. John of Jerusalem. Resided at Hall Road, Stanton-by-Dale. Married with a son named Jack who was a chartered accountant in Johannesburg."
 ---
 
 F. B. Cornelius was a distinguished engineer and manager at Stanton Ironworks Company, where he worked for 54 years before retiring at the end of March 1956. He was general manager of the company's concrete pipe plant.

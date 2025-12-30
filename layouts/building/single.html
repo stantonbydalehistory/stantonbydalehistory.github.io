@@ -40,7 +40,7 @@
 <hr>
 
 <h2>Residents connected with this building</h2>
-{{ $currentFile := .File.Path }}
+{{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
 {{ $residents := slice }}
 
 {{/* DIRECT residents assigned to this building */}}
@@ -66,12 +66,14 @@
   {{ end }}
 {{ end }}
 
-{{/* RESIDENTS from records that mention this building */}}
+{{/* ONLY RESIDENTS from records with explicit person_building_links mapping */}}
 {{ range where site.RegularPages "Section" "records" }}
-  {{ if in .Params.buildings $currentFile }}
-    {{ range .Params.residents }}
-      {{ with site.GetPage . }}
-        {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(from record: %s)" $.Title)) }}
+  {{ if .Params.person_building_links }}
+    {{ range $residentPath, $buildingList := .Params.person_building_links }}
+      {{ if in $buildingList $currentFile }}
+        {{ with site.GetPage $residentPath }}
+          {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(from record: %s)" $.Title)) }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
@@ -90,7 +92,7 @@
 <hr>
 
 <h2>Historical Records</h2>
-{{ $currentFile := .File.Path }}
+{{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
 {{ $records := slice }}
 
 {{/* Records that reference THIS building explicitly */}}

@@ -15,6 +15,14 @@ institutions:
 residents:
   - resident/d-r-scattergood
 
+person_building_links:
+  resident/d-r-scattergood:
+    - building/stanhope-street/stanhope-arms
+
+person_institution_links:
+  resident/d-r-scattergood:
+    - institution/stanhope-arms
+
 sources:
   - type: "newspaper"
     title: "Nottingham Evening Post"

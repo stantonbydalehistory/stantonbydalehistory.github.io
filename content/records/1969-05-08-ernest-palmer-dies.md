@@ -17,6 +17,15 @@ institutions:
 residents:
   - resident/ernest-palmer
 
+person_building_links:
+  resident/ernest-palmer:
+    - building/lows-lane/seven-oaks-inn
+    - building/dale-road/rose-cottage
+
+person_institution_links:
+  resident/ernest-palmer:
+    - institution/stanhope-arms
+
 sources:
   - type: "newspaper"
     title: null

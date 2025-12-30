@@ -10,9 +10,6 @@ roles:
   - aristocrat
 birth: 1781-12-07
 death: 1855-03-02
-businesses: []
-buildings: []
-notes: "Philip Henry Stanhope, 4th Earl Stanhope FRS (7 December 1781 – 2 March 1855), was an English aristocrat. Landowner who granted building leases in Stanton-by-Dale in 1848."
 ---
 Philip Henry Stanhope, 4th Earl Stanhope FRS (7 December 1781 – 2 March 1855), was an English aristocrat.
 

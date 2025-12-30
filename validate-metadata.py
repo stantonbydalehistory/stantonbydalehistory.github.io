@@ -43,6 +43,8 @@ def file_exists(content_dir, relative_path):
 EXPECTED_ARTICLE_FIELDS = {
     'title', 'date', 'dateAdded', 'sources', 'source', 'summary',
     'residents', 'buildings', 'institutions', 
+    'person_building_links',  # maps residents to buildings they're associated with (any relationship type)
+    'person_institution_links',  # maps residents to institutions they're associated with (any relationship type)
     'tags', 'themes', 'street', 'resident_role',
     'type', 'draft', 'layout',
     'businesses',  # deprecated, should be 'institutions'
@@ -57,6 +59,16 @@ EXPECTED_INSTITUTION_FIELDS = {
     'operating_from', 'operating_to',  # date range fields
     'aliases',  # alternative names
     'premises'  # deprecated, should be 'buildings'
+}
+
+# Expected fields for residents
+EXPECTED_RESIDENT_FIELDS = {
+    'title', 'role', 'roles', 'dates', 'birth', 'death',
+    'aliases', 'draft',
+    'buildings',  # deprecated, should be derived from records
+    'institutions',  # deprecated, should be derived from records
+    'businesses',  # deprecated, was renamed to institutions
+    'notes'  # deprecated, content should be in markdown body only
 }
 
 # Valid institution types (enum)
@@ -128,6 +140,73 @@ def validate_article(file_path, content_dir, errors, warnings):
                     errors.append(
                         f"{relative_path}: institution file '{institution}.md' does not exist"
                     )
+    
+    # Check person_building_links (maps residents to buildings they're associated with)
+    if 'person_building_links' in frontmatter:
+        person_building_links = frontmatter['person_building_links']
+        if not isinstance(person_building_links, dict):
+            errors.append(f"{relative_path}: 'person_building_links' should be a dictionary/object")
+        else:
+            for resident, building_list in person_building_links.items():
+                # Check resident path
+                if not resident.startswith('resident/'):
+                    errors.append(
+                        f"{relative_path}: person_building_links key '{resident}' should start with 'resident/'"
+                    )
+                elif not file_exists(content_dir, resident):
+                    errors.append(
+                        f"{relative_path}: person_building_links resident '{resident}.md' does not exist"
+                    )
+                
+                # Check building list
+                if not isinstance(building_list, list):
+                    errors.append(
+                        f"{relative_path}: person_building_links['{resident}'] should be an array of building paths"
+                    )
+                else:
+                    for building in building_list:
+                        if not building.startswith('building/'):
+                            errors.append(
+                                f"{relative_path}: person_building_links building '{building}' should start with 'building/'"
+                            )
+                        elif not file_exists(content_dir, building):
+                            errors.append(
+                                f"{relative_path}: person_building_links building '{building}.md' does not exist"
+                            )
+    
+    # Check person_institution_links (maps residents to institutions they're associated with)
+    if 'person_institution_links' in frontmatter:
+        person_institution_links = frontmatter['person_institution_links']
+        if not isinstance(person_institution_links, dict):
+            errors.append(f"{relative_path}: 'person_institution_links' should be a dictionary/object")
+        else:
+            for resident, institution_list in person_institution_links.items():
+                # Check resident path
+                if not resident.startswith('resident/'):
+                    errors.append(
+                        f"{relative_path}: person_institution_links key '{resident}' should start with 'resident/'"
+                    )
+                elif not file_exists(content_dir, resident):
+                    errors.append(
+                        f"{relative_path}: person_institution_links resident '{resident}.md' does not exist"
+                    )
+                
+                # Check institution list
+                if not isinstance(institution_list, list):
+                    errors.append(
+                        f"{relative_path}: person_institution_links['{resident}'] should be an array of institution paths"
+                    )
+                else:
+                    for institution in institution_list:
+                        if not institution.startswith('institution/'):
+                            errors.append(
+                                f"{relative_path}: person_institution_links institution '{institution}' should start with 'institution/'"
+                            )
+                        elif not file_exists(content_dir, institution):
+                            errors.append(
+                                f"{relative_path}: person_institution_links institution '{institution}.md' does not exist"
+                            )
+
     
     # Check for deprecated 'streets' field
     if 'streets' in frontmatter:
@@ -206,6 +285,44 @@ def validate_institution(file_path, content_dir, errors, warnings):
             f"{relative_path}: Uses deprecated 'premises' field, should use 'buildings' instead"
         )
 
+def validate_resident(file_path, content_dir, errors, warnings):
+    """Validate a single resident's metadata."""
+    relative_path = file_path.relative_to(content_dir)
+    frontmatter = extract_frontmatter(file_path)
+    
+    if not frontmatter:
+        errors.append(f"{relative_path}: No valid frontmatter found")
+        return
+    
+    # Check for unexpected fields
+    for field in frontmatter.keys():
+        if field not in EXPECTED_RESIDENT_FIELDS:
+            errors.append(f"{relative_path}: Unexpected field '{field}'")
+    
+    # Check for deprecated 'notes' field
+    if 'notes' in frontmatter:
+        errors.append(
+            f"{relative_path}: Uses 'notes' field. Content should be in markdown body only, not in frontmatter"
+        )
+    
+    # Check for deprecated 'businesses' field
+    if 'businesses' in frontmatter:
+        warnings.append(
+            f"{relative_path}: Uses deprecated 'businesses' field, should use 'institutions' instead"
+        )
+    
+    # Check for deprecated 'buildings' field
+    if 'buildings' in frontmatter:
+        warnings.append(
+            f"{relative_path}: Resident should not have 'buildings' field. Buildings are derived from records"
+        )
+    
+    # Check for deprecated 'institutions' field
+    if 'institutions' in frontmatter:
+        warnings.append(
+            f"{relative_path}: Resident should not have 'institutions' field. Institutions are derived from records"
+        )
+
 def get_file_context(file_path, content_dir):
     """Get the frontmatter context of a file for LLM fixing."""
     frontmatter = extract_frontmatter(file_path)
@@ -222,12 +339,13 @@ def main():
     content_dir = script_dir / 'content'
     records_dir = content_dir / 'records'
     institution_dir = content_dir / 'institution'
+    resident_dir = content_dir / 'resident'
     
     if not records_dir.exists():
         print(f"{Colors.RED}❌ Records directory not found: {records_dir}{Colors.RESET}")
         sys.exit(1)
     
-    print(f"{Colors.BLUE}🔍 Validating metadata in all articles and institutions...{Colors.RESET}\n")
+    print(f"{Colors.BLUE}🔍 Validating metadata in all articles, institutions, and residents...{Colors.RESET}\n")
     
     # Get all markdown files
     article_files = list(records_dir.rglob('*.md'))
@@ -237,6 +355,11 @@ def main():
     if institution_dir.exists():
         institution_files = list(institution_dir.glob('*.md'))
         print(f"Found {len(institution_files)} institutions to validate")
+    
+    resident_files = []
+    if resident_dir.exists():
+        resident_files = list(resident_dir.glob('*.md'))
+        print(f"Found {len(resident_files)} residents to validate")
     print()
     
     errors = []
@@ -250,6 +373,10 @@ def main():
     # Validate each institution
     for institution_file in institution_files:
         validate_institution(institution_file, content_dir, errors, warnings)
+    
+    # Validate each resident
+    for resident_file in resident_files:
+        validate_resident(resident_file, content_dir, errors, warnings)
     
     # Collect context for files with errors
     for error in errors:

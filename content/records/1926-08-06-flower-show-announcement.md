@@ -7,6 +7,8 @@ categories: ["events"]
 source: "Stapleford and Sandiacre News"
 
 themes: ["community events", "horticulture"]
+buildings:
+  - building/main-street/stanton-hall
 ---
 
 ## STANTON-BY-DALE and DALE ABBEY

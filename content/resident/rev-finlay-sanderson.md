@@ -8,9 +8,6 @@ roles:
   - rector
 birth: null
 death: 1958-12-21
-businesses: []
-buildings: []
-notes: "Rector of Stanton-by-Dale from 1926 to 1933. Lived at Park Road, Dorking after retirement. Died December 21, 1958, aged 85."
 ---
 Rev. Finlay Sanderson served as Rector of Stanton-by-Dale from 1926 to 1933. After his retirement, he lived at Park Road, Dorking.
 

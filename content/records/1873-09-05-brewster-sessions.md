@@ -14,6 +14,14 @@ institutions:
 residents:
   - resident/mrs-plackett
 
+person_building_links:
+  resident/mrs-plackett:
+    - building/stanhope-street/stanhope-arms
+
+person_institution_links:
+  resident/mrs-plackett:
+    - institution/stanhope-arms
+
 sources:
   - type: "newspaper"
     title: "Derby and Chesterfield Reporter"

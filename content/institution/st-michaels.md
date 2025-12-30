@@ -6,7 +6,7 @@ buildings:
   - building/stanton-by-dale/st-michael-and-all-angels-church
 
 residents:
-  - resident/finlay-sanderson
+  - resident/rev-finlay-sanderson
   - resident/rev-a-b-roberts
 notes: "Parish church of Stanton-by-Dale."
 ---

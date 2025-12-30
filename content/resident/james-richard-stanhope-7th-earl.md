@@ -9,10 +9,6 @@ roles:
   - aristocrat
 birth: 1880-04-09
 death: 1967-03-15
-businesses: []
-buildings:
-  - building/dale-road/grove-farm
-notes: "James Richard Stanhope, 7th Earl Stanhope (9 April 1880 – 15 March 1967) was a British peer and landowner. During the 1912 coal strike, he allowed his cottage tenants in Stanton and Dale to mine coal from the old open pit on Grove Farm."
 ---
 James Richard Stanhope, 7th Earl Stanhope (9 April 1880 – 15 March 1967) was a British peer who inherited the title in 1905. He was the son of Arthur Philip Stanhope, 6th Earl Stanhope.
 

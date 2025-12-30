@@ -1,7 +1,6 @@
 ---
 title: "Mrs. Plackett"
 role: ["Licensed Victualler"]
-institution: ["Jessop's Arms Inn"]
 dates:
   active: "1873"
 ---

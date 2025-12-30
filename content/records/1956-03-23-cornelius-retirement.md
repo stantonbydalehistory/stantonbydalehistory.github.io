@@ -14,6 +14,11 @@ institutions:
 residents:
   - resident/f-b-cornelius
 
+person_institution_links:
+  resident/f-b-cornelius:
+    - institution/stanton-ironworks
+    - institution/british-legion
+
 sources:
   - type: "newspaper"
     title: "Derby Evening Telegraph"

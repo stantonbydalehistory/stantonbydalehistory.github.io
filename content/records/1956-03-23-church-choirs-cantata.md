@@ -11,6 +11,14 @@ buildings:
 residents:
   - resident/rev-walter-noy
 
+person_building_links:
+  resident/rev-walter-noy:
+    - building/stanhope-street/st-michaels
+
+person_institution_links:
+  resident/rev-walter-noy:
+    - institution/st-michaels
+
 sources:
   - type: "newspaper"
     title: "Derby Evening Telegraph"

@@ -14,6 +14,14 @@ institutions:
 residents:
   - resident/hedley-horsfield
 
+person_building_links:
+  resident/hedley-horsfield:
+    - building/stanhope-street/stanhope-arms
+
+person_institution_links:
+  resident/hedley-horsfield:
+    - institution/stanhope-arms
+
 sources:
   - type: "newspaper"
     title: "Long Eaton Advertiser"

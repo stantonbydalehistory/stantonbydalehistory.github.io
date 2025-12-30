@@ -9,6 +9,10 @@ source: "Derby Daily Telegraph"
 residents:
   - resident/c-j-w-radford
   - resident/h-e-kewley
+
+person_institution_links:
+  resident/h-e-kewley:
+    - institution/st-michaels
 ---
 
 ## THE LATE MR. C. J. W. RADFORD.

@@ -14,6 +14,14 @@ institutions:
 residents:
   - resident/bertram-haseldine
 
+person_building_links:
+  resident/bertram-haseldine:
+    - building/dale-road/chequers-inn
+
+person_institution_links:
+  resident/bertram-haseldine:
+    - institution/chequers-inn
+
 sources:
   - type: "newspaper"
     title: null

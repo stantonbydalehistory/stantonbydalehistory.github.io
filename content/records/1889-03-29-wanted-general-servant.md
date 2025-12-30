@@ -14,6 +14,14 @@ institutions:
 residents:
   - resident/mrs-scattergood
 
+person_building_links:
+  resident/mrs-scattergood:
+    - building/stanhope-street/stanhope-arms
+
+person_institution_links:
+  resident/mrs-scattergood:
+    - institution/stanhope-arms
+
 sources:
   - type: "newspaper"
     title: "Ilkeston Pioneer"

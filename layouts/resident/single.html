@@ -22,46 +22,6 @@
     {{ .Content }}
   </div>
 
-  {{ if or .Params.buildings .Params.institutions }}
-  <hr>
-  
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
-    
-    {{ with .Params.buildings }}
-    <div class="content-section">
-      <h2>🏛️ Associated Buildings</h2>
-      <ul>
-        {{ range . }}
-          {{ with site.GetPage . }}
-            <li>
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              {{ with .Params.street }}<br><small style="color: #7d6c5a;">{{ . }}</small>{{ end }}
-            </li>
-          {{ end }}
-        {{ end }}
-      </ul>
-    </div>
-    {{ end }}
-
-    {{ with .Params.institutions }}
-    <div class="content-section">
-      <h2>🏢 Associated Institutions</h2>
-      <ul>
-        {{ range . }}
-          {{ with site.GetPage . }}
-            <li>
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              {{ with .Params.institution_type }}<br><small style="color: #7d6c5a;">({{ . | title }})</small>{{ end }}
-            </li>
-          {{ end }}
-        {{ end }}
-      </ul>
-    </div>
-    {{ end }}
-    
-  </div>
-  {{ end }}
-
   <hr>
 
   <div class="content-section">
@@ -79,33 +39,40 @@
     {{ $pages = where $pages "Section" "ne" "institution" }}
 
     {{ $foundRecords := false }}
+    {{ $relatedBuildings := slice }}
+    {{ $relatedInstitutions := slice }}
     
     <ul>
       {{/* Records directly referencing this resident */}}
       {{ range where $pages "Params.residents" "intersect" (slice $personID) }}
         {{ $foundRecords = true }}
+        
+        {{/* ONLY collect buildings from person_building_links for this resident */}}
+        {{ if .Params.person_building_links }}
+          {{ range $resident, $buildings := .Params.person_building_links }}
+            {{ if eq $resident $personID }}
+              {{ range $buildings }}
+                {{ $relatedBuildings = $relatedBuildings | append . }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        
+        {{/* ONLY collect institutions from person_institution_links for this resident */}}
+        {{ if .Params.person_institution_links }}
+          {{ range $resident, $institutions := .Params.person_institution_links }}
+            {{ if eq $resident $personID }}
+              {{ range $institutions }}
+                {{ $relatedInstitutions = $relatedInstitutions | append . }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        
         <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
           <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
           {{ with .Date }}<br><span class="date">{{ .Format "2 January 2006" }}</span>{{ end }}
         </li>
-      {{ end }}
-
-      {{/* Records referencing institutions this resident belongs to */}}
-      {{ with $.Params.institutions }}
-        {{ range . }}
-          {{ $instID := . }}
-          {{ $inst := site.GetPage $instID }}
-          {{ if $inst }}
-            {{ range where $pages "Params.institutions" "intersect" (slice $instID) }}
-              {{ $foundRecords = true }}
-              <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #bfa88f; border-radius: 4px;">
-                <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
-                <br><small style="color: #7d6c5a;">via {{ $inst.Title }}</small>
-                {{ with .Date }}<br><span class="date">{{ .Format "2 January 2006" }}</span>{{ end }}
-              </li>
-            {{ end }}
-          {{ end }}
-        {{ end }}
       {{ end }}
     </ul>
     
@@ -113,5 +80,48 @@
       <p style="font-style: italic; color: #999;">No records found yet.</p>
     {{ end }}
   </div>
+
+  {{/* Show derived buildings and institutions */}}
+  {{ if or $relatedBuildings $relatedInstitutions }}
+  <hr>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
+    
+    {{ if $relatedBuildings }}
+    <div class="content-section">
+      <h2>🏛️ Associated Buildings</h2>
+      <p style="font-style: italic; color: #7d6c5a; font-size: 0.9rem;">Derived from historical records</p>
+      <ul>
+        {{ range ($relatedBuildings | uniq) }}
+          {{ with site.GetPage . }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              {{ with .Params.street }}<br><small style="color: #7d6c5a;">{{ . }}</small>{{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ if $relatedInstitutions }}
+    <div class="content-section">
+      <h2>🏢 Associated Institutions</h2>
+      <p style="font-style: italic; color: #7d6c5a; font-size: 0.9rem;">Derived from historical records</p>
+      <ul>
+        {{ range ($relatedInstitutions | uniq) }}
+          {{ with site.GetPage . }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              {{ with .Params.institution_type }}<br><small style="color: #7d6c5a;">({{ . | title }})</small>{{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+    
+  </div>
+  {{ end }}
 </article>
 {{ end }}

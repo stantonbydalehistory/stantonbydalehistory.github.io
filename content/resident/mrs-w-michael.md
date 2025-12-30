@@ -6,8 +6,5 @@ aliases:
 roles: []
 birth: null
 death: null
-businesses: []
-buildings: []
-notes: ""
 ---
 Placeholder for Mrs. W. Michael.

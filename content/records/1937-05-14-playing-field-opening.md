@@ -7,6 +7,7 @@ themes: ["community", "recreation", "sports", "ironworks"]
 
 buildings:
   - building/dale-road/playing-field
+  - building/main-street/stanton-hall
 
 institutions:
   - institution/stanton-ironworks
@@ -14,6 +15,14 @@ institutions:
 residents:
   - resident/e-j-fox
   - resident/rev-a-b-roberts
+  - resident/c-r-crompton
+
+person_building_links:
+  resident/c-r-crompton:
+    - building/main-street/stanton-hall
+
+  resident/rev-a-b-roberts:
+    - building/stanhope-street/st-michaels
 
 sources:
   - type: "newspaper"
