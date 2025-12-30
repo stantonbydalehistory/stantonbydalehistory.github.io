@@ -2,6 +2,9 @@ baseURL = 'https://stantonbydalehistory.github.io/'
 languageCode = 'en-us'
 title = "Stanton-by-Dale - A Village's History"
 
+[params]
+googleAnalytics = "G-P1Y8NME5YH"
+
 [taxonomies]
 street = "streets"
 theme = "themes"

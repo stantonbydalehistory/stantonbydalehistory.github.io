@@ -4,6 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+  
+  {{ with site.Params.googleAnalytics }}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  </script>
+  {{ end }}
+  
   <style>
     * {
       margin: 0;
