@@ -9,9 +9,14 @@ buildings: []
 
 institutions:
   - institution/stanton-ironworks
+  - institution/derbyshire-constabulary
 
 residents:
   - resident/pc-vickers
+
+person_institution_links:
+  resident/pc-vickers:
+    - institution/derbyshire-constabulary
 
 sources:
   - type: "newspaper"

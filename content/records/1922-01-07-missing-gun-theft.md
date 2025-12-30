@@ -7,8 +7,15 @@ themes: ["crime", "theft"]
 
 buildings: []
 
+institutions:
+  - institution/derbyshire-constabulary
+
 residents:
   - resident/pc-parfitt
+
+person_institution_links:
+  resident/pc-parfitt:
+    - institution/derbyshire-constabulary
 
 sources:
   - type: "newspaper"

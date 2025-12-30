@@ -4,9 +4,13 @@ date: 1934-06-02
 dateAdded: 2025-12-30
 themes: ["court", "transport"]
 buildings: []
-institutions: []
+institutions:
+  - institution/derbyshire-constabulary
 residents:
   - resident/pc-vickers
+person_institution_links:
+  resident/pc-vickers:
+    - institution/derbyshire-constabulary
 sources:
   - type: "newspaper"
     title: "Stapleford and Sandiacre News"

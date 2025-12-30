@@ -4,9 +4,13 @@ date: 1938-07-16
 dateAdded: 2025-12-30
 themes: ["rescue", "canal", "children"]
 buildings: []
-institutions: []
+institutions:
+  - institution/derbyshire-constabulary
 residents:
   - resident/pc-vickers
+person_institution_links:
+  resident/pc-vickers:
+    - institution/derbyshire-constabulary
 sources:
   - type: "newspaper"
     title: "Stapleford and Sandiacre News"

@@ -11,9 +11,14 @@ buildings:
 institutions:
   - institution/stanhope-arms
   - institution/stanton-ironworks
+  - institution/derbyshire-constabulary
 
 residents:
   - resident/pc-newton
+
+person_institution_links:
+  resident/pc-newton:
+    - institution/derbyshire-constabulary
 
 sources:
   - type: "newspaper"

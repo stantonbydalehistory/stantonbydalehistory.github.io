@@ -7,10 +7,15 @@ themes: ["police", "retirement"]
 
 buildings: []
 
-institutions: []
+institutions:
+  - institution/derbyshire-constabulary
 
 residents:
   - resident/pc-vickers
+
+person_institution_links:
+  resident/pc-vickers:
+    - institution/derbyshire-constabulary
 
 sources:
   - type: "newspaper"
