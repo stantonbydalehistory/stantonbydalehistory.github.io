@@ -24,11 +24,10 @@
   
   <div class="content-section">
     <h2>🏛️ Buildings</h2>
-    <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">Historic structures and landmarks</p>
-    <ul>
-      {{ range first 8 (where site.RegularPages "Section" "building") }}
+    <ul id="buildings-list">
+      {{ range (where site.RegularPages "Section" "building") }}
         {{ if .Title }}
-          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          <li style="display: none;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
       {{ end }}
     </ul>
@@ -37,11 +36,10 @@
 
   <div class="content-section">
     <h2>🏢 Institutions</h2>
-    <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">Village organizations and businesses</p>
-    <ul>
-      {{ range first 8 (where site.RegularPages "Section" "institution") }}
+    <ul id="institutions-list">
+      {{ range (where site.RegularPages "Section" "institution") }}
         {{ if .Title }}
-          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          <li style="display: none;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
       {{ end }}
     </ul>
@@ -50,11 +48,10 @@
 
   <div class="content-section">
     <h2>👤 Residents</h2>
-    <p style="font-style: italic; color: #7d6c5a; font-size: 0.95rem;">People who shaped our community</p>
-    <ul>
-      {{ range first 8 (where site.RegularPages "Section" "resident") }}
+    <ul id="residents-list">
+      {{ range (where site.RegularPages "Section" "resident") }}
         {{ if .Title }}
-          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          <li style="display: none;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
       {{ end }}
     </ul>
@@ -62,4 +59,37 @@
   </div>
   
 </div>
+
+<script>
+// Shuffle and show random items from list
+function showRandomItems(listId, count) {
+  const ul = document.getElementById(listId);
+  if (!ul) return;
+  
+  const items = Array.from(ul.children);
+  
+  // Fisher-Yates shuffle
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  
+  // Clear the list
+  ul.innerHTML = '';
+  
+  // Show first 'count' items from shuffled array
+  const itemsToShow = items.slice(0, Math.min(count, items.length));
+  itemsToShow.forEach(item => {
+    item.style.display = '';
+    ul.appendChild(item);
+  });
+}
+
+// Show random items on page load
+document.addEventListener('DOMContentLoaded', function() {
+  showRandomItems('buildings-list', 8);
+  showRandomItems('institutions-list', 8);
+  showRandomItems('residents-list', 8);
+});
+</script>
 {{ end }}
