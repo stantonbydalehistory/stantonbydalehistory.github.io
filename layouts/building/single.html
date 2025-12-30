@@ -3,8 +3,17 @@
 <h1>{{ .Title }}</h1>
 
 <p>
-  {{ if .Params.street }}
-    Street: <a href="/streets/{{ urlize .Params.street }}/">{{ .Params.street }}</a><br>
+  {{ $street := .Params.street }}
+  {{ if not $street }}
+    {{ $sections := split .File.Dir "/" }}
+    {{ if gt (len $sections) 1 }}
+      {{ $street = index $sections 1 }}
+      {{ $street = replaceRE "-" " " $street }}
+      {{ $street = title $street }}
+    {{ end }}
+  {{ end }}
+  {{ if $street }}
+    Street: <a href="/streets/{{ urlize $street }}/">{{ $street }}</a><br>
   {{ end }}
   {{ if .Params.number }}Number: {{ .Params.number }}<br>{{ end }}
   {{ if .Params.name }}Name: {{ .Params.name }}<br>{{ end }}
