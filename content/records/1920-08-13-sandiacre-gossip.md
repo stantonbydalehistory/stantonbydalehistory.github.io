@@ -12,10 +12,6 @@ institutions:
   - institution/stanton-ironworks
   - institution/seven-oaks-inn
 
-person_building_links:
-
-person_institution_links:
-
 sources:
   - type: "newspaper"
     title: "Sandiacre and Stapleford Weekly News"
