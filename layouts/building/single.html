@@ -94,21 +94,24 @@
 <h2>Historical Records</h2>
 {{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
 {{ $records := slice }}
+{{ $seenRecords := dict }}
 
 {{/* Records that reference THIS building explicitly */}}
 {{ range where site.RegularPages "Section" "records" }}
   {{ if in .Params.buildings $currentFile }}
     {{ $records = $records | append (dict "link" .RelPermalink "title" .Title "date" .Date "note" "") }}
+    {{ $seenRecords = merge $seenRecords (dict .RelPermalink true) }}
   {{ end }}
 {{ end }}
 
-{{/* Records that reference INSTITUTIONS in this building */}}
+{{/* Records that reference INSTITUTIONS in this building (skip if already seen) */}}
 {{ with $.Params.institutions }}
   {{ range . }}
     {{ $instPath := . }}
     {{ range where site.RegularPages "Section" "records" }}
-      {{ if in .Params.institutions $instPath }}
+      {{ if and (in .Params.institutions $instPath) (not (index $seenRecords .RelPermalink)) }}
         {{ $records = $records | append (dict "link" .RelPermalink "title" .Title "date" .Date "note" (printf "(via %s)" ($instPath | path.Base | humanize))) }}
+        {{ $seenRecords = merge $seenRecords (dict .RelPermalink true) }}
       {{ end }}
     {{ end }}
   {{ end }}
