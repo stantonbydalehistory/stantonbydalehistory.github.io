@@ -16,7 +16,7 @@ sources:
 
 ## Stanton by Dale.
 
-**TO BE LET**, and entered upon at Lady-day next, all that comfortable and genteel **DWELLING HOUSE**, called **STANTON HALL**, containing dining, drawing, and breakfast rooms, with two kitchens and water closet on the ground floor; also coach-house for two carriages, stabling for five houses, with lofts and dove-cote, greenhouse, extensive pleasure and kitchen gardens, and several Closes of rich **GRASS LAND**, containing together 24a. 3R. 15P., with the Shooting over the Manor of Stanton, containing 1400 Acres, if required.
+**TO BE LET**, and entered upon at Lady-day next, all that comfortable and genteel **DWELLING HOUSE**, called **STANTON HALL**, containing dining, drawing, and breakfast rooms, with two kitchens and water closet on the ground floor; also coach-house for two carriages, stabling for five houses, with lofts and dove-cote, greenhouse, extensive pleasure and kitchen gardens, and several Closes of rich **GRASS LAND**, containing together 24A. 3R. 15P., with the Shooting over the Manor of Stanton, containing 1400 Acres, if required.
 
 Stanton is situate seven miles from Nottingham and nine from Derby, and within reach of the Marquis of Hastings and Mr. Meynell's Hounds.
 
