@@ -49,7 +49,8 @@ EXPECTED_ARTICLE_FIELDS = {
     'type', 'draft', 'layout',
     'businesses',  # deprecated, should be 'institutions'
     'categories',  # deprecated or alternative taxonomy
-    'event_date_note'  # additional context for dates
+    'event_date_note',  # additional context for dates
+    'exclude_from_homepage'  # exclude from random record lists on homepage
 }
 
 # Expected fields for institutions

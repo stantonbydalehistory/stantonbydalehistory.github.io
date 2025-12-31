@@ -13,7 +13,7 @@ Filename format: `YYYY-MM-DD-descriptive-title.md`
 ```yaml
 ---
 title: "Article Title"
-date: YYYY-MM-DD
+date: YYYY-MM-DD  # Can be YYYY if only year is known
 dateAdded: YYYY-MM-DD  # Date added to site
 themes: ["theme1", "theme2"]  # e.g., "crime", "death", "business"
 residents: []  # Array of resident/filename references
@@ -22,10 +22,15 @@ institutions: []  # Array of institution/filename references
 sources:
   - type: "newspaper"  # or "document", "census", etc.
     title: "Newspaper Name"
-    date: YYYY-MM-DD
+    date: YYYY-MM-DD  # Can be YYYY if only year is known
     page: null  # or page number
 ---
 ```
+
+**Date Format Note:** The `date` field can be:
+- Full date: `YYYY-MM-DD` (e.g., `1883-11-23`)
+- Year only: `YYYY` (e.g., `1839`) when exact date is unknown
+- Filename should match: `YYYY-MM-DD-title.md` or `YYYY-title.md` for year-only dates
 
 **Optional Fields:**
 - `summary`: Brief description
