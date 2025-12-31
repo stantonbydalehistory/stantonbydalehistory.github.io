@@ -76,7 +76,8 @@ VALID_INSTITUTION_TYPES = {
     'business',
     'social',
     'religious',
-    'sports'
+    'sports',
+    'governmental'
 }
 
 def validate_article(file_path, content_dir, errors, warnings):

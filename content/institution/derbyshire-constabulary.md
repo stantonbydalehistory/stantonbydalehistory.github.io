@@ -1,6 +1,6 @@
 ---
 title: "Derbyshire Constabulary"
-institution_type: "social"
+institution_type: "governmental"
 buildings: []
 residents:
   - resident/pc-newton

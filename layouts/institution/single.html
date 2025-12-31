@@ -48,7 +48,7 @@
 <hr>
 
 <h2>Historical Records</h2>
-{{ $currentFile := .File.Path }}
+{{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
 {{ $records := slice }}
 
 {{/* Find all records that reference this institution */}}

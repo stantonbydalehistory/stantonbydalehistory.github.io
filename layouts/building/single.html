@@ -119,7 +119,7 @@
 
 {{ if $records }}
   <ul>
-    {{ range $records }}
+    {{ range sort $records ".date" }}
       <li>
         <a href="{{ .link }}">{{ .title }}</a>
         {{ with .date }} - {{ .Format "2 January 2006" }}{{ end }}

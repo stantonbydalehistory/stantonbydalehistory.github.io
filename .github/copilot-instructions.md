@@ -106,7 +106,7 @@ Filename format: `descriptive-name.md`
 ```yaml
 ---
 title: "Institution Name"
-institution_type: "business" | "social" | "religious" | "sports"  # Must be lowercase
+institution_type: "business" | "social" | "religious" | "sports" | "governmental"  # Must be lowercase
 ---
 ```
 
@@ -115,6 +115,7 @@ institution_type: "business" | "social" | "religious" | "sports"  # Must be lowe
 - `social` - British Legion, Women's Institute, associations
 - `religious` - Churches, chapels
 - `sports` - Cricket club, sports clubs
+- `governmental` - Police force, local government bodies
 
 **Optional Fields:**
 ```yaml

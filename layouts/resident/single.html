@@ -44,7 +44,7 @@
     
     <ul>
       {{/* Records directly referencing this resident */}}
-      {{ range where $pages "Params.residents" "intersect" (slice $personID) }}
+      {{ range sort (where $pages "Params.residents" "intersect" (slice $personID)) "Date" }}
         {{ $foundRecords = true }}
         
         {{/* ONLY collect buildings from person_building_links for this resident */}}
