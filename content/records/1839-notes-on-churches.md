@@ -1,15 +1,17 @@
 ---
+title: "History of the Parish of Stanton by Dale (Notes on Churches, Cox)"
 date: 1839
-sources:
+dateAdded: 2025-01-03
 sources:
   - type: "book"
     title: "Notes on Churches"
-    author: 
+    author: Cox 
     date: 1839
     page: 415
-
-
 ---
+
+** Note that this transcription is not yet complete!**
+
 The ecclesiastical history of the parish of Stanton-by-Dale is the most meagre of any in the county. The church, as well as the greater portion of the land in the parish was given at an early date to the adjacent abbey of Dale.[^1] It was served by the canons of Dale, and was so thoroughly in their own jurisdiction that no vicarage was ordained, and consequently there are no episcopal institutions to be found at Lichfield. The whole of the tithes were appropriated to the monastery, and the church was considered to be within the peculiar jurisdiction of the abbot, so that it is not even mentioned in the Taxation roll of 1291, or in the *Valor Ecclesiasticus* of Henry VIII.
 
 After the dissolusion of the monasteries, most of the properties of Dale Abbey at Stanton were granted to the Babingtons, and was purchased of them by Michael Willoughby, of Risley, in the reign of Elizabeth.
@@ -24,7 +26,7 @@ The Parliamentary Survey of Beneficies, 1650, thus mentions this parish, in whic
 
 It was an error of the Commissioners to describe it as a vicarage, for it was merely a curacy, dependent for stipend on money allotted by the lay impropriator, and not on any fixed portion of the tithes. But two years later, one portion of the lesser tithes were allotted to the minister, so that from that date he had some right to the title of vicar. On a slab in the nave of the church is the following record :-
 
-""Sr Henry Willughby Bar<sup>nt</sup> Lord of this Man<sup>r</sup> and patron of this Church out of his pious and charitable disposition did in his life time give toward the maintenance of Minister in this place all the tithe hay belonging to this towne reserveing only v<sup>e</sup> yearely in lieu thereof to be paid to him and his heires for ever as is expressed in a writting under his hand delivered to John Baguley & John Turner Churchwardens the 20 of February An<sup>o</sup> D<span style="text-decoration: overline;">n</span>i 1652. Witnes whereof Michaell Cowle & others.""
+""Sr Henry Willughby Bar<sup>nt</sup> Lord of this Man<sup>r</sup> and patron of this Church out of his pious and charitable disposition did in his life time give toward the maintenance of Minister in this place all the tithe hay belonging to this towne reserveing only v<sup>e</sup> yearely in lieu thereof to be paid to him and his heires for ever as is expressed in a writting under his hand delivered to John Baguley & John Turner Churchwardens the 20 of February An<sup>o</sup> <span style="text-decoration: overline;">D</span>ni 1652. Witnes whereof Michaell Cowle & others.""
 
 We find from the registers that ministers subsequently styled themselves vicars. The earliest Register Book begins in 1605 ; the first part is evidently copied from an older one. Under the year 1606, it is stated - "For this year, the Old Register cannot be read." In 1670 mention is made o f "Edward, son of Godfrey Barton, Vicar." This cure was frequently held with the adjacent one of Sandiacre. In 1702 the great tithes were restored to the church, and the incumbents have since been rectors. This is narrated in the registers, where a copy is given of an indenture, dated November 12th, 1702, between Elizabeth Gerey of Risley, sole daughter and heiress of Hon. Anchitel Grey, of the one part, and Henry Keyes, the younger, of Hopwell, Richard Middlemore of Stanton and John Flanstead of Little Hallam, of the other part, wherein it is recited that Anchitel Grey, by will dated May 20th, 1702, stated that he had agreed to purchase of Middlemore Pilkington all the tithes of corn, grain, hay, wool, lambs, etc., and all glebe land, in Stanton, for the sum of £380, and being prevented by sickness completing the purchase, ordered his executors to carry it out within three months of his decease. This was accordingly done, and the rectorial property assigned Henry Keyes and the two others mentioned above, in trust for the parson, provided there is always on Sunday one service at Stanton and one at Dale.[^2]
 
