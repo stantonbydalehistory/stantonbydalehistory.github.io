@@ -2,6 +2,9 @@
 title: "History of the Parish of Stanton by Dale (Notes on Churches, Cox)"
 date: 1839
 dateAdded: 2025-01-03
+themes: ["religious", "history"]
+institutions:
+  - institution/st-michaels
 sources:
   - type: "book"
     title: "Notes on Churches"

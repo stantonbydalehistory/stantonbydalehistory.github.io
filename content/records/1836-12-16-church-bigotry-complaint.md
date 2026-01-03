@@ -1,6 +1,6 @@
 ---
 title: "Church of England Bigotry"
-date: 1836-12-27
+date: 1836-12-16
 dateAdded: 2026-01-03
 themes: ["religious", "controversy"]
 institutions:
@@ -10,7 +10,7 @@ residents:
 sources:
   - type: "newspaper"
     title: "Nottingham Review"
-    date: 1836-12-08
+    date: 1836-12-16
     page: null
 person_institution_links:
   resident/rev-john-dale-wawn:

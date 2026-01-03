@@ -10,3 +10,12 @@ street = "streets"
 theme = "themes"
 institution_type = "institution_types"
 resident_role = "resident_roles"
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.parser]
+      autoHeadingID = true
+      autoHeadingIDType = "github"
