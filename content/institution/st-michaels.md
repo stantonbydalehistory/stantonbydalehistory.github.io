@@ -9,6 +9,15 @@ residents:
   - resident/rev-finlay-sanderson
   - resident/rev-a-b-roberts
   - resident/john-dale-wawn
+  - resident/rev-s-eversfield
+  - resident/rev-j-g-howard
+  - resident/rev-j-h-pugh
+  - resident/rev-j-m-freshfield
+  - resident/rev-w-fox
+  - resident/rev-trewman
+  - resident/rev-e-r-newman
+  - resident/rev-j-brett
+  - resident/rev-h-e-kewley
 notes: "Parish church of Stanton-by-Dale."
 ---
 
@@ -61,7 +70,16 @@ The following table lists all recorded clergy and church officials at St Michael
 | Eyton, James[^1]            | 1816 | Vac (Death)                            | Vicar               |
 | Howard, John Garton[^1]     | 1816 | Appt (Institution)                     | Vicar               |
 | Wawn, John Dale[^1]         | 1816 | Appt (Licensing)                       | Stipendiary Curate  |
-| Sanderson, Finlay           | c.1920s |                                      | Vicar               |
+| Pugh, J. H.[^2]             | c.1850s |                                      | Rector/Curate(?)     |
+| Howard, J. G.[^2][^11]      | 1816-1862 |                                      | Rector              |
+| Eversfield, Stephen [^2][^3] | 1855-1862 |                                   | Curate              |
+| Freshfield, J. M.[^13][^14][^6][^7] | 1863-1873 | Appt / Vac (Preferment)      | Rector              |
+| Fox, W.[^6][^7][^12]        | 1873-1904 | Appt (Institution)                  | Rector              |
+| Trewman[^10]                | 1882 |                                        | Curate              |
+| Newman, E. R.[^8]           | 1883 |                                        | Curate              |
+| Brett, J.[^5]               | 1889 |                                        | Curate              |
+| Kewley, H. E.[^4]           | 1905-1926 |                                      | Rector              |
+| Sanderson, Finlay[^9]       | 1926-1933 |                                      | Rector              |
 | Roberts, A. B.              | c.1930s |                                      | Vicar               |
 
 ### Key to Abbreviations
@@ -71,3 +89,29 @@ The following table lists all recorded clergy and church officials at St Michael
 - **Vac**: Vacancy
 
 [^1]: The Clergy Database, "Stanton-by-Dale, St Michael and All Angels," accessed 3 January 2026, https://theclergydatabase.org.uk/jsp/locations/index.jsp?locKey=2366
+
+[^2]: ["The Restoration of Stanton Church,"](/records/1860-07-20-restoration-stanton-church/) *Derby and Chesterfield Reporter*, 20 July 1860.
+
+[^3]: ["Presentation to a Clergyman,"](/records/1862-11-21-presentation-to-rev-eversfield/) *Derbyshire Advertiser and Journal*, 21 November 1862.
+
+[^4]: ["The Rev. H. E. Kewley,"](/records/1926-08-27-rev-h-e-kewley-departure/) *Derbyshire Advertiser and Journal*, 27 August 1926.
+
+[^5]: ["Primrose League Meeting,"](/records/1889-02-22-primrose-league-meeting/) *Ilkeston Pioneer*, 22 February 1889.
+
+[^6]: ["Institution of Rev. W. Fox as Vicar,"](/records/1873-10-31-institution-rev-w-fox/) *Derby and Chesterfield Reporter*, 31 October 1873.
+
+[^7]: ["St. Michael's Church Renovation and Re-opening,"](/records/1873-10-03-st-michaels-renovation/) *Derby and Chesterfield Reporter*, 3 October 1873.
+
+[^8]: ["Annual Gathering of the Congregation,"](/records/1883-01-12-annual-congregation-gathering/) *Derbyshire Advertiser and Journal*, 12 January 1883.
+
+[^9]: ["Mothers' Union and Choir Boys' Supper,"](/records/1927-02-04-mothers-union-choir-boys/) *Derbyshire Advertiser and Journal*, 4 February 1927.
+
+[^10]: ["Parish Church Easter Services,"](/records/1882-04-14-parish-church-easter-services/) *Derby and Chesterfield Reporter*, 14 April 1882.
+
+[^11]: ["The Rectory, Stanton-by-Dale - Auction Sale,"](/records/1862-11-07-rectory-auction-sale/) *Derby and Chesterfield Reporter*, 7 November 1862.
+
+[^12]: ["The Forthcoming Induction of the Vicar,"](/records/1904-08-19-forthcoming-induction-vicar/) *Derby Daily Telegraph*, 19 August 1904.
+
+[^13]: ["Preferments and Appointments,"](/records/1863-01-16-preferments-appointments/) *Leicester Journal*, 16 January 1863.
+
+[^14]: ["Surrogate Appointment for Marriage Licenses,"](/records/1863-04-10-surrogate-appointment/) *Derbyshire Advertiser and Journal*, 10 April 1863.
