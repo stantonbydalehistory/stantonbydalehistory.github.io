@@ -1,6 +1,6 @@
 ---
 title: "History of the Parish of Stanton by Dale (Notes on Churches, Cox)"
-date: 1839
+date: 1839-01-01
 dateAdded: 2025-01-03
 themes: ["religious", "history"]
 institutions:
