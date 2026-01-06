@@ -1,0 +1,22 @@
+{{ define "main" }}
+<h1>🏷️ All Themes</h1>
+<p style="font-style: italic; color: #7d6c5a; font-size: 1.1rem; margin-bottom: 2rem;">
+  Browse records by theme
+</p>
+
+<div class="content-section">
+  {{ $themes := .Site.Taxonomies.themes }}
+  {{ if gt (len $themes) 0 }}
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
+      {{ range $name, $taxonomy := $themes }}
+        <a href="{{ "/themes/" | relLangURL }}{{ $name | urlize }}/" 
+           style="display: inline-block; padding: 0.5rem 1rem; background: #f9f7f4; border: 1px solid #8b7355; border-radius: 4px; color: #8b7355; text-decoration: none; transition: all 0.2s;">
+          {{ $name }} <span style="background: #8b7355; color: white; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.9rem; margin-left: 0.5rem;">{{ len $taxonomy }}</span>
+        </a>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p style="font-style: italic; color: #999;">No themes found yet.</p>
+  {{ end }}
+</div>
+{{ end }}

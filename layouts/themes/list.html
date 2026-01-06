@@ -1,11 +1,11 @@
 {{ define "main" }}
-<h1>📜 Historical Records</h1>
+<h1>🏷️ Theme: {{ .Title }}</h1>
 <p style="font-style: italic; color: #7d6c5a; font-size: 1.1rem; margin-bottom: 2rem;">
-  A chronological collection of documents, newspaper articles, and accounts chronicling life in Stanton-by-Dale through the centuries.
+  All records tagged with theme "{{ .Title }}"
 </p>
 
 <div class="content-section">
-  {{ $pages := where site.RegularPages "Section" "records" }}
+  {{ $pages := .Pages }}
   {{ $pagesByYear := $pages.GroupByDate "2006" "asc" }}
   
   {{ range $pagesByYear }}
@@ -29,7 +29,11 @@
   {{ end }}
   
   {{ if eq (len $pages) 0 }}
-    <p style="font-style: italic; color: #999;">No records found yet.</p>
+    <p style="font-style: italic; color: #999;">No records found with this theme.</p>
   {{ end }}
+</div>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ "/themes/" | relLangURL }}" style="color: #8b7355;">← View all themes</a>
 </div>
 {{ end }}

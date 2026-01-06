@@ -14,7 +14,12 @@
     {{ end }}
     
     {{ with .Params.themes }}
-      <p><strong>🏷️ Themes:</strong> {{ delimit . ", " }}</p>
+      <p><strong>🏷️ Themes:</strong> 
+        {{ range $index, $theme := . }}
+          {{ if $index }}, {{ end }}
+          <a href="{{ "/themes/" | relLangURL }}{{ $theme | urlize }}/" style="color: #8b7355; text-decoration: none; border-bottom: 1px solid #8b7355;">{{ $theme }}</a>
+        {{ end }}
+      </p>
     {{ end }}
   </div>
 
