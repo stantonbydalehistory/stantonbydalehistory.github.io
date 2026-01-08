@@ -55,6 +55,10 @@ jobs:
         run: |
           hugo \
             --minify
+      - name: Install validation script dependencies
+        run: pip install pyyaml
+      - name: Validate metadata
+        run: python ./validate-metadata.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
