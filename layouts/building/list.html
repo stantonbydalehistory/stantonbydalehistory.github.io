@@ -12,7 +12,6 @@
         <li style="margin-bottom: 1rem;">
           <a href="{{ .RelPermalink }}" style="font-weight: bold; font-size: 1.05rem;">{{ .Title }}</a>
           {{ with .Params.type }}<br><small style="color: #7d6c5a;">Type: {{ . }}</small>{{ end }}
-          {{ with .Params.current_status }}<br><small style="color: #7d6c5a;">Status: {{ . }}</small>{{ end }}
         </li>
       {{ end }}
     </ul>
