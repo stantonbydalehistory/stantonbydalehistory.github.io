@@ -466,7 +466,7 @@ def main():
 
     census_files = []
     if census_dir.exists():
-        census_files = list(census_dir.rglob('*.md'))
+        census_files = [f for f in census_dir.rglob('*.md') if f.name != '_index.md']
         print(f"Found {len(census_files)} census records to validate")
     print()
     

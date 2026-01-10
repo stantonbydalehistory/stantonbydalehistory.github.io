@@ -4,9 +4,6 @@ date: 1887-02-12
 dateAdded: 2026-01-10
 themes: ["community", "religious", "music"]
 residents:
-  - resident/thomas-towle
-  - resident/eben-barber
-  - resident/rev-wm-russell
   - resident/thomas-mee
 institutions:
   - institution/wesleyan-chapel
