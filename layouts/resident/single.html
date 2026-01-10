@@ -81,6 +81,45 @@
     {{ end }}
   </div>
 
+  {{/* Census Appearances */}}
+  {{ $censusAppearances := slice }}
+  {{ range where site.RegularPages "Section" "census" }}
+    {{ $censusPage := . }}
+    {{ range $entryIndex, $entry := .Params.entries }}
+      {{ range $personIndex, $person := $entry.household }}
+        {{ if and $person.resident (eq $person.resident $personID) }}
+          {{ $censusAppearances = $censusAppearances | append (dict "census" $censusPage "entry" $entry "person" $person "personIndex" $personIndex) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $censusAppearances }}
+  <hr>
+  
+  <div class="content-section">
+    <h2>📊 Census Appearances</h2>
+    <p style="font-style: italic; color: #7d6c5a; margin-bottom: 1rem;">Census records mentioning {{ .Title }}</p>
+    
+    <ul>
+      {{ range $censusAppearances }}
+        <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #6b8e23; border-radius: 4px;">
+          <a href="{{ .census.RelPermalink }}#schedule-{{ .entry.schedule }}-person-{{ .personIndex }}" style="border: none; font-weight: bold;">
+            {{ .census.Title }}
+          </a>
+          <br><span class="date">{{ .census.Params.census_date }}</span>
+          {{ if .entry.street }}<br><small style="color: #7d6c5a;">{{ .entry.street }}{{ if .entry.address }}, {{ .entry.address }}{{ end }}</small>{{ end }}
+          <br><small style="color: #7d6c5a;">
+            <strong>{{ .person.relation }}</strong>
+            {{ if .person.age }} | Age: {{ .person.age }}{{ end }}
+            {{ if .person.occupation }} | {{ .person.occupation }}{{ end }}
+          </small>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
   {{/* Show derived buildings and institutions */}}
   {{ if or $relatedBuildings $relatedInstitutions }}
   <hr>

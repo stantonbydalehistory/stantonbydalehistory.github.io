@@ -154,6 +154,110 @@ institutions: []  # Institutions that operated here
 ---
 ```
 
+### 5. Census Records
+Location: `content/census/`
+Filename format: `YYYY.md` (e.g., `1861.md`)
+
+**Required Fields:**
+```yaml
+---
+title: "YYYY Census"
+date: YYYY-MM-DD  # Census date
+census_year: YYYY
+census_date: "D Month YYYY"  # Human readable date
+fields:  # Column definitions for this census year
+  - key: "schedule"
+    label: "Schedule Number"
+  - key: "name"
+    label: "Name and Surname"
+  - key: "relation"
+    label: "Relation to Head of Family"
+  - key: "condition"
+    label: "Condition"
+    help: "Married, single, widowed"
+  - key: "age"
+    label: "Age"
+  - key: "gender"
+    label: "Gender"
+    help: "M or F"
+  - key: "occupation"
+    label: "Rank, Profession or Occupation"
+  - key: "birthplace"
+    label: "Where Born"
+  - key: "disability"
+    label: "Whether Blind, Deaf or Dumb"
+entries:  # Household entries
+  - schedule: 1
+    street: "Street Name"
+    address: "Building Name"  # Optional
+    building: "building/street/filename"  # Optional link
+    household:
+      - name: "John Smith"
+        resident: "resident/john-smith"  # Optional - link if resident page exists
+        relation: "Head"
+        condition: "Married"
+        age: 45
+        gender: "M"
+        occupation: "Publican"
+        birthplace: "Stanton, Derbyshire"
+        disability: ""
+    notes: "Optional notes about this household"  # Optional
+---
+
+Content describing this census...
+```
+
+**Field Structure:**
+- `fields`: Array of field definitions that define columns for this census year
+  - `key`: Short field name used in household data (e.g., "name", "age", "occupation")
+  - `label`: Full column heading as it appears on the census form
+  - `help`: Optional tooltip text to explain the field
+
+**Entry Structure:**
+- `entries`: Array of households/schedules from the census
+  - `schedule`: Schedule number from census form (required)
+  - `street`: Street name (required)
+  - `address`: Specific building name or address (optional)
+  - `building`: Link to building page (optional, format: `building/street-name/filename`)
+  - `household`: Array of people in this household (required)
+    - Use short field names matching the `key` values in `fields`
+    - `name`: Person's full name (required)
+    - `resident`: Link to resident page (optional, format: `resident/filename`)
+    - Other fields as defined in `fields` array
+  - `notes`: Optional notes about this household
+
+**Important Census Guidelines:**
+1. **One census file per year** - All households for a year in one file
+2. **Flexible fields** - Different census years have different fields, define them in `fields` array
+3. **Optional resident links** - Only link to resident pages that exist; leave blank ("") for others (e.g., children who don't appear in other records)
+4. **Use shorthand** - Field keys are short (name, age, occupation) while labels are full (Name and Surname, Rank Profession or Occupation)
+5. **Building links** - Link households to building pages where applicable for cross-referencing
+6. **Anchored links** - Each person gets an auto-generated anchor: `#schedule-N-person-M` for deep linking from resident pages
+7. **Table layout** - The census layout automatically renders data as a table matching the original census format
+
+**Different Census Years:**
+Different census years have different fields. Always define the fields for that specific year:
+- 1841: Fewer fields, no relationship to head, ages rounded
+- 1851-1911: More detailed fields, exact ages, relationships
+- Later censuses: Additional fields like rooms, employer status, etc.
+
+Example fields for 1841 census:
+```yaml
+fields:
+  - key: "schedule"
+    label: "Schedule Number"
+  - key: "name"
+    label: "Name"
+  - key: "age"
+    label: "Age"
+    help: "Ages rounded to nearest 5 over age 15"
+  - key: "occupation"
+    label: "Profession, Trade, Employment"
+  - key: "birthplace"
+    label: "Where Born"
+    help: "Y if born in same county, N if not, or country name"
+```
+
 ## Validation
 Run `python3 validate-metadata.py` to check all metadata conforms to standards after each edit.
 
@@ -161,8 +265,62 @@ Run `python3 validate-metadata.py` to check all metadata conforms to standards a
 - Residents: `resident/filename` (without .md extension)
 - Buildings: `building/street-name/filename`
 - Institutions: `institution/filename`
+- Census: `census/YYYY` (e.g., `census/1861`)
 
 ## Examples
+
+### Example Census Entry
+```yaml
+---
+title: "1861 Census"
+date: 1861-04-07
+census_year: 1861
+census_date: "7 April 1861"
+fields:
+  - key: "schedule"
+    label: "Schedule Number"
+  - key: "street"
+    label: "Street"
+  - key: "name"
+    label: "Name and Surname"
+  - key: "relation"
+    label: "Relation to Head of Family"
+  - key: "condition"
+    label: "Condition"
+  - key: "age"
+    label: "Age"
+  - key: "gender"
+    label: "Gender"
+  - key: "occupation"
+    label: "Rank, Profession or Occupation"
+  - key: "birthplace"
+    label: "Where Born"
+entries:
+  - schedule: 1
+    street: "Stanhope Street"
+    address: "Stanhope Arms"
+    building: "building/stanhope-street/stanhope-arms"
+    household:
+      - name: "John Smith"
+        resident: "resident/john-smith"
+        relation: "Head"
+        condition: "Married"
+        age: 45
+        gender: "M"
+        occupation: "Publican"
+        birthplace: "Stanton, Derbyshire"
+      - name: "Mary Smith"
+        resident: ""
+        relation: "Wife"
+        condition: "Married"
+        age: 42
+        gender: "F"
+        occupation: ""
+        birthplace: "Sandiacre, Derbyshire"
+---
+
+This is the 1861 census for Stanton-by-Dale.
+```
 
 ### Example Record
 ```yaml
@@ -278,6 +436,15 @@ The Stanton Ironworks was a major employer in the area...
 2. Link to buildings where it operates
 3. Link to key residents (owners, officials)
 4. Use `notes` for brief description
+
+### When creating a census:
+1. Use filename: `YYYY.md` (e.g., `1861.md`)
+2. Define fields for that specific census year in `fields` array
+3. Use shorthand keys in household data (name, age, occupation)
+4. Only link to residents that have pages; leave others blank ("")
+5. Link households to buildings where applicable
+6. Add notes to individual households if needed
+7. All households for a year go in one file
 
 ## Workflow
 1. Create/edit content

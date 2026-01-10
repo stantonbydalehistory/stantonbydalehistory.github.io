@@ -1,0 +1,192 @@
+{{ define "main" }}
+<article>
+  <h1>📊 {{ .Title }}</h1>
+  
+  <div class="metadata">
+    <p><strong>📅 Census Date:</strong> <span class="date">{{ .Params.census_date }}</span></p>
+    <p><strong>🗓️ Year:</strong> {{ .Params.census_year }}</p>
+  </div>
+
+  <div class="content-section">
+    {{ .Content }}
+  </div>
+
+  <hr>
+
+  {{ if .Params.entries }}
+  <div class="content-section">
+    <h2>📋 Census Records</h2>
+    
+    {{ range $entryIndex, $entry := .Params.entries }}
+      <div id="schedule-{{ $entry.schedule }}" style="margin-bottom: 3rem; padding: 1.5rem; background: #f9f7f4; border-radius: 8px; border-left: 4px solid #8b7355;">
+        
+        <h3 style="margin-top: 0; color: #5d4e37; border-bottom: 2px solid #d4c4b0; padding-bottom: 0.5rem;">
+          Schedule {{ $entry.schedule }}
+          {{ if $entry.street }} - {{ $entry.street }}{{ end }}
+          {{ if $entry.address }} ({{ $entry.address }}){{ end }}
+        </h3>
+        
+        {{ if $entry.building }}
+          {{ with site.GetPage $entry.building }}
+            <p style="margin-top: 0.5rem;"><strong>🏛️ Building:</strong> <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+          {{ end }}
+        {{ end }}
+
+        {{ if $entry.household }}
+        <div style="overflow-x: auto; margin-top: 1rem;">
+          {{/* Check if we have both age and gender fields */}}
+          {{ $hasAge := false }}
+          {{ $hasGender := false }}
+          {{ $ageField := dict }}
+          {{ range $.Params.fields }}
+            {{ if eq .key "age" }}
+              {{ $hasAge = true }}
+              {{ $ageField = . }}
+            {{ end }}
+            {{ if eq .key "gender" }}
+              {{ $hasGender = true }}
+            {{ end }}
+          {{ end }}
+          {{ $combineAgeGender := and $hasAge $hasGender }}
+          
+          <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <thead>
+              {{/* First header row - main column titles */}}
+              <tr style="background: #5d4e37; color: white;">
+                {{ range $.Params.fields }}
+                  {{ if ne .key "schedule" }}
+                    {{ if ne .key "street" }}
+                      {{ if eq .key "age" }}
+                        {{/* Age column with colspan for Males/Females */}}
+                        {{ if $combineAgeGender }}
+                          <th colspan="2" style="padding: 0.75rem; text-align: center; border: 1px solid #d4c4b0; font-size: 0.9rem;">
+                            {{ .label }}
+                            {{ if .help }}<br><span style="font-size: 0.75rem; font-weight: normal; font-style: italic;">{{ .help }}</span>{{ end }}
+                          </th>
+                        {{ else }}
+                          <th style="padding: 0.75rem; text-align: left; border: 1px solid #d4c4b0; font-size: 0.9rem;">
+                            {{ .label }}
+                            {{ if .help }}<br><span style="font-size: 0.75rem; font-weight: normal; font-style: italic;">{{ .help }}</span>{{ end }}
+                          </th>
+                        {{ end }}
+                      {{ else if eq .key "gender" }}
+                        {{/* Skip gender column if combined with age */}}
+                        {{ if not $combineAgeGender }}
+                          <th style="padding: 0.75rem; text-align: left; border: 1px solid #d4c4b0; font-size: 0.9rem;">
+                            {{ .label }}
+                            {{ if .help }}<br><span style="font-size: 0.75rem; font-weight: normal; font-style: italic;">{{ .help }}</span>{{ end }}
+                          </th>
+                        {{ end }}
+                      {{ else }}
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid #d4c4b0; font-size: 0.9rem;">
+                          {{ .label }}
+                          {{ if .help }}<br><span style="font-size: 0.75rem; font-weight: normal; font-style: italic;">{{ .help }}</span>{{ end }}
+                        </th>
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              </tr>
+              {{/* Second header row - Males/Females sub-columns if needed */}}
+              {{ if $combineAgeGender }}
+              <tr style="background: #6d5d47; color: white;">
+                {{ range $.Params.fields }}
+                  {{ if ne .key "schedule" }}
+                    {{ if ne .key "street" }}
+                      {{ if eq .key "age" }}
+                        <th style="padding: 0.5rem; text-align: center; border: 1px solid #d4c4b0; font-size: 0.85rem;">Males</th>
+                        <th style="padding: 0.5rem; text-align: center; border: 1px solid #d4c4b0; font-size: 0.85rem;">Females</th>
+                      {{ else if ne .key "gender" }}
+                        <th style="border: 1px solid #d4c4b0;"></th>
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              </tr>
+              {{ end }}
+            </thead>
+            <tbody>
+              {{ range $personIndex, $person := $entry.household }}
+              <tr id="schedule-{{ $entry.schedule }}-person-{{ $personIndex }}" style="border-bottom: 1px solid #e5ddd3; {{ if eq (mod $personIndex 2) 0 }}background: #fefdfb;{{ else }}background: white;{{ end }}">
+                {{ range $.Params.fields }}
+                  {{ if ne .key "schedule" }}
+                    {{ if ne .key "street" }}
+                      {{ $value := index $person .key }}
+                      {{ if eq .key "age" }}
+                        {{ if $combineAgeGender }}
+                          {{/* Males column */}}
+                          <td style="padding: 0.75rem; border: 1px solid #e5ddd3; vertical-align: top; text-align: center;">
+                            {{ if eq $person.gender "M" }}{{ $value }}{{ end }}
+                          </td>
+                          {{/* Females column */}}
+                          <td style="padding: 0.75rem; border: 1px solid #e5ddd3; vertical-align: top; text-align: center;">
+                            {{ if eq $person.gender "F" }}{{ $value }}{{ end }}
+                          </td>
+                        {{ else }}
+                          <td style="padding: 0.75rem; border: 1px solid #e5ddd3; vertical-align: top;">
+                            {{ $value }}
+                          </td>
+                        {{ end }}
+                      {{ else if eq .key "gender" }}
+                        {{/* Skip gender data column if combined with age */}}
+                        {{ if not $combineAgeGender }}
+                          <td style="padding: 0.75rem; border: 1px solid #e5ddd3; vertical-align: top;">
+                            {{ $value }}
+                          </td>
+                        {{ end }}
+                      {{ else }}
+                        <td style="padding: 0.75rem; border: 1px solid #e5ddd3; vertical-align: top;">
+                          {{ if and (eq .key "name") $person.resident }}
+                            {{ with site.GetPage $person.resident }}
+                              <a href="{{ .RelPermalink }}" style="font-weight: bold; color: #8b7355; text-decoration: none; border-bottom: 1px solid #8b7355;">{{ $value }}</a>
+                            {{ else }}
+                              {{ $value }}
+                            {{ end }}
+                          {{ else if eq .key "relation" }}
+                            <strong>{{ $value }}</strong>
+                          {{ else }}
+                            {{ $value }}
+                          {{ end }}
+                        </td>
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+        {{ end }}
+        
+        {{ if $entry.notes }}
+        <div style="margin-top: 1rem; padding: 0.75rem; background: #fff9e6; border-left: 3px solid #f0c808; border-radius: 4px;">
+          <strong>📝 Notes:</strong> {{ $entry.notes }}
+        </div>
+        {{ end }}
+        
+      </div>
+    {{ end }}
+  </div>
+  {{ end }}
+
+</article>
+
+<style>
+  /* Responsive table styling */
+  @media (max-width: 768px) {
+    table {
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 0.5rem !important;
+    }
+  }
+  
+  /* Zebra striping for better readability */
+  tbody tr:hover {
+    background: #fff9e6 !important;
+  }
+</style>
+
+{{ end }}

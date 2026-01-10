@@ -72,6 +72,11 @@ EXPECTED_RESIDENT_FIELDS = {
     'notes'  # deprecated, content should be in markdown body only
 }
 
+EXPECTED_CENSUS_FIELDS = {
+    'title', 'date', 'census_year', 'census_date', 'fields', 'entries',
+    'draft', 'summary'
+}
+
 # Valid institution types (enum)
 VALID_INSTITUTION_TYPES = {
     'business',
@@ -325,6 +330,100 @@ def validate_resident(file_path, content_dir, errors, warnings):
             f"{relative_path}: Resident should not have 'institutions' field. Institutions are derived from records"
         )
 
+def validate_census(file_path, content_dir, errors, warnings):
+    """Validate a single census record's metadata."""
+    relative_path = file_path.relative_to(content_dir)
+    frontmatter = extract_frontmatter(file_path)
+
+    if not frontmatter:
+        errors.append(f"{relative_path}: No valid frontmatter found")
+        return
+
+    # Check for unexpected fields
+    for field in frontmatter.keys():
+        if field not in EXPECTED_CENSUS_FIELDS:
+            warnings.append(f"{relative_path}: Unexpected field '{field}'")
+    
+    # Check required fields
+    if 'title' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'title' field")
+    if 'census_year' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'census_year' field")
+    if 'census_date' not in frontmatter:
+        warnings.append(f"{relative_path}: Missing 'census_date' field")
+    if 'fields' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'fields' field")
+    if 'entries' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'entries' field")
+    
+    # Validate fields structure
+    if 'fields' in frontmatter:
+        fields = frontmatter['fields']
+        if not isinstance(fields, list):
+            errors.append(f"{relative_path}: 'fields' should be an array")
+        else:
+            for i, field in enumerate(fields):
+                if not isinstance(field, dict):
+                    errors.append(f"{relative_path}: fields[{i}] should be a dictionary")
+                    continue
+                if 'key' not in field:
+                    errors.append(f"{relative_path}: fields[{i}] missing 'key' field")
+                if 'label' not in field:
+                    errors.append(f"{relative_path}: fields[{i}] missing 'label' field")
+    
+    # Validate entries structure
+    if 'entries' in frontmatter:
+        entries = frontmatter['entries']
+        if not isinstance(entries, list):
+            errors.append(f"{relative_path}: 'entries' should be an array")
+        else:
+            for i, entry in enumerate(entries):
+                if not isinstance(entry, dict):
+                    errors.append(f"{relative_path}: entries[{i}] should be a dictionary")
+                    continue
+                
+                # Check schedule number exists
+                if 'schedule' not in entry:
+                    errors.append(f"{relative_path}: entries[{i}] missing 'schedule' field")
+                
+                # Check household array exists
+                if 'household' not in entry:
+                    errors.append(f"{relative_path}: entries[{i}] missing 'household' array")
+                elif not isinstance(entry['household'], list):
+                    errors.append(f"{relative_path}: entries[{i}].household should be an array")
+                else:
+                    # Validate each person in household
+                    for j, person in enumerate(entry['household']):
+                        if not isinstance(person, dict):
+                            errors.append(f"{relative_path}: entries[{i}].household[{j}] should be a dictionary")
+                            continue
+                        
+                        # Check resident link if present
+                        if 'resident' in person and person['resident']:
+                            resident_path = person['resident']
+                            if not resident_path.startswith('resident/'):
+                                errors.append(
+                                    f"{relative_path}: entries[{i}].household[{j}].resident '{resident_path}' "
+                                    "should start with 'resident/'"
+                                )
+                            elif not file_exists(content_dir, resident_path):
+                                errors.append(
+                                    f"{relative_path}: entries[{i}].household[{j}].resident '{resident_path}.md' does not exist"
+                                )
+                
+                # Check building link if present
+                if 'building' in entry and entry['building']:
+                    building_path = entry['building']
+                    if not building_path.startswith('building/'):
+                        errors.append(
+                            f"{relative_path}: entries[{i}].building '{building_path}' should start with 'building/'"
+                        )
+                    elif not file_exists(content_dir, building_path):
+                        errors.append(
+                            f"{relative_path}: entries[{i}].building '{building_path}.md' does not exist"
+                        )
+
+
 def get_file_context(file_path, content_dir):
     """Get the frontmatter context of a file for LLM fixing."""
     frontmatter = extract_frontmatter(file_path)
@@ -342,6 +441,7 @@ def main():
     records_dir = content_dir / 'records'
     institution_dir = content_dir / 'institution'
     resident_dir = content_dir / 'resident'
+    census_dir = content_dir / 'census'
     
     if not records_dir.exists():
         print(f"{Colors.RED}❌ Records directory not found: {records_dir}{Colors.RESET}")
@@ -363,6 +463,12 @@ def main():
         resident_files = list(resident_dir.glob('*.md'))
         print(f"Found {len(resident_files)} residents to validate")
     print()
+
+    census_files = []
+    if census_dir.exists():
+        census_files = list(census_dir.rglob('*.md'))
+        print(f"Found {len(census_files)} census records to validate")
+    print()
     
     errors = []
     warnings = []
@@ -380,6 +486,10 @@ def main():
     for resident_file in resident_files:
         validate_resident(resident_file, content_dir, errors, warnings)
     
+    # Validate each census record
+    for census_file in census_files:
+        validate_census(census_file, content_dir, errors, warnings)
+
     # Collect context for files with errors
     for error in errors:
         file_match = re.match(r'^(.*?):', error)

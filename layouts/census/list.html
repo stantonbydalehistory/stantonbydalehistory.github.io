@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="list-page">
+  <h1>📊 Census Records</h1>
+  
+  <div class="content-section">
+    <p>Census records provide detailed snapshots of the village population at different points in history. Each census includes information about residents, their occupations, ages, birthplaces, and living arrangements.</p>
+  </div>
+
+  <div style="margin-top: 2rem;">
+    {{ range .Pages.ByDate.Reverse }}
+      <div style="margin-bottom: 2rem; padding: 1.5rem; background: #f9f7f4; border-radius: 8px; border-left: 4px solid #8b7355;">
+        <h2 style="margin-top: 0;">
+          <a href="{{ .RelPermalink }}" style="color: #5d4e37; text-decoration: none;">
+            {{ .Title }}
+          </a>
+        </h2>
+        
+        <p style="margin: 0.5rem 0;">
+          <strong>📅 Census Date:</strong> <span class="date">{{ .Params.census_date }}</span>
+        </p>
+        
+        {{ if .Params.entries }}
+          <p style="margin: 0.5rem 0;">
+            <strong>📋 Schedules:</strong> {{ len .Params.entries }}
+            <strong style="margin-left: 1rem;">👥 People:</strong> 
+            {{ $totalPeople := 0 }}
+            {{ range .Params.entries }}
+              {{ $totalPeople = add $totalPeople (len .household) }}
+            {{ end }}
+            {{ $totalPeople }}
+          </p>
+        {{ end }}
+        
+        {{ if .Summary }}
+          <div style="margin-top: 1rem; color: #7d6c5a;">
+            {{ .Summary }}
+          </div>
+        {{ end }}
+        
+        <a href="{{ .RelPermalink }}" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: #8b7355; color: white; text-decoration: none; border-radius: 4px;">
+          View Census →
+        </a>
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
