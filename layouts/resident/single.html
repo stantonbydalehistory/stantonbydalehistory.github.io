@@ -41,34 +41,43 @@
     {{ $foundRecords := false }}
     {{ $relatedBuildings := slice }}
     {{ $relatedInstitutions := slice }}
+    {{ $announcements := slice }}
+    {{ $regularRecords := slice }}
+    
+    {{/* Separate announcements from regular records */}}
+    {{ range sort (where $pages "Params.residents" "intersect" (slice $personID)) "Date" }}
+      {{ if eq .Params.record_type "announcement" }}
+        {{ $announcements = $announcements | append . }}
+      {{ else }}
+        {{ $regularRecords = $regularRecords | append . }}
+      {{ end }}
+      
+      {{/* ONLY collect buildings from person_building_links for this resident */}}
+      {{ if .Params.person_building_links }}
+        {{ range $resident, $buildings := .Params.person_building_links }}
+          {{ if eq $resident $personID }}
+            {{ range $buildings }}
+              {{ $relatedBuildings = $relatedBuildings | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      {{/* ONLY collect institutions from person_institution_links for this resident */}}
+      {{ if .Params.person_institution_links }}
+        {{ range $resident, $institutions := .Params.person_institution_links }}
+          {{ if eq $resident $personID }}
+            {{ range $institutions }}
+              {{ $relatedInstitutions = $relatedInstitutions | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
     
     <ul>
-      {{/* Records directly referencing this resident */}}
-      {{ range sort (where $pages "Params.residents" "intersect" (slice $personID)) "Date" }}
+      {{ range $regularRecords }}
         {{ $foundRecords = true }}
-        
-        {{/* ONLY collect buildings from person_building_links for this resident */}}
-        {{ if .Params.person_building_links }}
-          {{ range $resident, $buildings := .Params.person_building_links }}
-            {{ if eq $resident $personID }}
-              {{ range $buildings }}
-                {{ $relatedBuildings = $relatedBuildings | append . }}
-              {{ end }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-        
-        {{/* ONLY collect institutions from person_institution_links for this resident */}}
-        {{ if .Params.person_institution_links }}
-          {{ range $resident, $institutions := .Params.person_institution_links }}
-            {{ if eq $resident $personID }}
-              {{ range $institutions }}
-                {{ $relatedInstitutions = $relatedInstitutions | append . }}
-              {{ end }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-        
         <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
           <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
           {{ with .Date }}<br><span class="date">{{ .Format "2 January 2006" }}</span>{{ end }}
@@ -80,6 +89,28 @@
       <p style="font-style: italic; color: #999;">No records found yet.</p>
     {{ end }}
   </div>
+
+  {{/* Announcements Section */}}
+  {{ if gt (len $announcements) 0 }}
+  <hr>
+  
+  <div class="content-section">
+    <h2>📰 Announcements</h2>
+    <p style="font-style: italic; color: #7d6c5a; margin-bottom: 1rem;">Birth, marriage, and death announcements</p>
+    
+    <ul>
+      {{ range $announcements }}
+        <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #fefdfb; border-left: 2px solid #bfa88f; border-radius: 4px;">
+          {{ if .Params.announcement_type }}
+            <span style="display: inline-block; padding: 0.1rem 0.4rem; background: #8b7355; color: white; font-size: 0.75rem; border-radius: 3px; margin-right: 0.5rem;">{{ .Params.announcement_type | upper }}</span>
+          {{ end }}
+          <a href="{{ .RelPermalink }}" style="border: none;">{{ .Title }}</a>
+          {{ with .Date }}<br><span class="date" style="font-size: 0.85rem;">{{ .Format "2 January 2006" }}</span>{{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
 
   {{/* Census Appearances */}}
   {{ $censusAppearances := slice }}

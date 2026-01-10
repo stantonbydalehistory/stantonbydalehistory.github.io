@@ -6,7 +6,9 @@
 
 <div class="content-section">
   {{ $pages := where site.RegularPages "Section" "records" }}
-  {{ $pagesByYear := $pages.GroupByDate "2006" "asc" }}
+  {{ $mainRecords := where $pages "Params.record_type" "ne" "announcement" }}
+  {{ $announcements := where $pages "Params.record_type" "announcement" }}
+  {{ $pagesByYear := $mainRecords.GroupByDate "2006" "asc" }}
   
   {{ range $pagesByYear }}
     <h2 style="margin-top: 2rem;">{{ .Key }}</h2>
@@ -28,8 +30,36 @@
     </ul>
   {{ end }}
   
-  {{ if eq (len $pages) 0 }}
+  {{ if eq (len $mainRecords) 0 }}
     <p style="font-style: italic; color: #999;">No records found yet.</p>
   {{ end }}
 </div>
+
+{{ if gt (len $announcements) 0 }}
+<hr style="margin: 3rem 0;">
+
+<div class="content-section">
+  <h2>📰 Birth, Marriage & Death Announcements</h2>
+  <p style="font-style: italic; color: #7d6c5a; margin-bottom: 1rem;">
+    Brief newspaper announcements of births, marriages, and deaths in the village.
+  </p>
+  
+  {{ $announcementsByYear := $announcements.GroupByDate "2006" "asc" }}
+  
+  {{ range $announcementsByYear }}
+    <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">{{ .Key }}</h3>
+    <ul style="list-style: none; margin-left: 0;">
+      {{ range .Pages }}
+        <li style="padding: 0.5rem; margin-bottom: 0.5rem; background: #fefdfb; border-left: 2px solid #bfa88f; border-radius: 4px;">
+          {{ if .Params.announcement_type }}
+            <span style="display: inline-block; padding: 0.1rem 0.4rem; background: #8b7355; color: white; font-size: 0.75rem; border-radius: 3px; margin-right: 0.5rem;">{{ .Params.announcement_type | upper }}</span>
+          {{ end }}
+          <a href="{{ .RelPermalink }}" style="border: none; font-size: 0.95rem;">{{ .Title }}</a>
+          {{ with .Date }}<span class="date" style="margin-left: 0.5rem; font-size: 0.85rem;">{{ .Format "2 Jan 2006" }}</span>{{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</div>
+{{ end }}
 {{ end }}

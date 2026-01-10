@@ -39,6 +39,8 @@ sources:
 - `resident_role`: Role taxonomy
 - `categories`: Alternative taxonomy
 - `event_date_note`: Additional date context
+- `record_type`: Set to `"announcement"` for birth/marriage/death announcements (excludes from homepage rotation)
+- `announcement_type`: Type of announcement: `"birth"`, `"marriage"`, or `"death"` (only use with `record_type: "announcement"`)
 - `person_building_links`: Dictionary mapping residents to buildings they're associated with
   ```yaml
   person_building_links:

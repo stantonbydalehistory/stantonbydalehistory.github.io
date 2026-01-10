@@ -9,7 +9,7 @@
   <p style="font-style: italic; color: #7d6c5a;">Glimpses into the village's past... ({{ len (where site.RegularPages "Section" "records") }} records total)</p>
   <ul id="records-list" style="list-style: none; margin-left: 0;">
     {{ range (where site.RegularPages "Section" "records") }}
-      {{ if not .Params.exclude_from_homepage }}
+      {{ if ne .Params.record_type "announcement" }}
       <li style="display: none; padding: 0.75rem; margin-bottom: 0.5rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
         <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold;">{{ .Title }}</a>
         {{ with .Date }}<span class="date"> – {{ .Format "2 January 2006" }}</span>{{ end }}
