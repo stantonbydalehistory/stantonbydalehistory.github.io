@@ -1,13 +1,14 @@
 {{ define "main" }}
 <div class="list-page">
-  <h1>📊 Census Records</h1>
+  <h1>📊 {{ .Title }}</h1>
   
   <div class="content-section">
-    <p>Census records provide detailed snapshots of the village population at different points in history. Each census includes information about residents, their occupations, ages, birthplaces, and living arrangements.</p>
+    {{ .Content }}
   </div>
 
   <div style="margin-top: 2rem;">
-    {{ range .Pages.ByDate.Reverse }}
+    {{ $pages := where .Site.RegularPages "Section" "census" }}
+    {{ range $pages.ByDate.Reverse }}
       <div style="margin-bottom: 2rem; padding: 1.5rem; background: #f9f7f4; border-radius: 8px; border-left: 4px solid #8b7355;">
         <h2 style="margin-top: 0;">
           <a href="{{ .RelPermalink }}" style="color: #5d4e37; text-decoration: none;">
