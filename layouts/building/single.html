@@ -42,12 +42,16 @@
 <h2>Residents connected with this building</h2>
 {{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
 {{ $residents := slice }}
+{{ $seenResidents := dict }}
 
 {{/* DIRECT residents assigned to this building */}}
 {{ with .Params.residents }}
   {{ range . }}
     {{ with site.GetPage . }}
-      {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" "") }}
+      {{ if not (index $seenResidents .RelPermalink) }}
+        {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" "") }}
+        {{ $seenResidents = merge $seenResidents (dict .RelPermalink true) }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -59,7 +63,10 @@
     {{ if $inst }}
       {{ range $inst.Params.residents }}
         {{ with site.GetPage . }}
-          {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(via %s)" $inst.Title)) }}
+          {{ if not (index $seenResidents .RelPermalink) }}
+            {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(via %s)" $inst.Title)) }}
+            {{ $seenResidents = merge $seenResidents (dict .RelPermalink true) }}
+          {{ end }}
         {{ end }}
       {{ end }}
     {{ end }}
@@ -72,7 +79,10 @@
     {{ range $residentPath, $buildingList := .Params.person_building_links }}
       {{ if in $buildingList $currentFile }}
         {{ with site.GetPage $residentPath }}
-          {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(from record: %s)" $.Title)) }}
+          {{ if not (index $seenResidents .RelPermalink) }}
+            {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" (printf "(from record: %s)" $.Title)) }}
+            {{ $seenResidents = merge $seenResidents (dict .RelPermalink true) }}
+          {{ end }}
         {{ end }}
       {{ end }}
     {{ end }}
@@ -87,6 +97,96 @@
   </ul>
 {{ else }}
   <p>No residents recorded at this building.</p>
+{{ end }}
+
+<hr>
+
+<h2>📊 Census Records</h2>
+{{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
+{{ $censusEntries := slice }}
+
+{{/* Find all census records that reference this building */}}
+{{ range where site.RegularPages "Section" "census" }}
+  {{ $censusPage := . }}
+  {{ if .Params.entries }}
+    {{ range $entryIndex, $entry := .Params.entries }}
+      {{ if eq $entry.building $currentFile }}
+        {{ $censusEntries = $censusEntries | append (dict 
+          "censusLink" $censusPage.RelPermalink 
+          "censusTitle" $censusPage.Title 
+          "censusYear" $censusPage.Params.census_year
+          "censusDate" $censusPage.Params.census_date
+          "schedule" $entry.schedule
+          "street" $entry.street
+          "address" $entry.address
+          "household" $entry.household
+        ) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $censusEntries }}
+  <div style="margin-top: 1.5rem;">
+    {{ range sort $censusEntries "censusYear" }}
+      <div style="margin-bottom: 2rem; padding: 1.5rem; background: #f9f7f4; border-radius: 8px; border-left: 4px solid #8b7355;">
+        <h3 style="margin-top: 0; color: #5d4e37; border-bottom: 2px solid #d4c4b0; padding-bottom: 0.5rem;">
+          <a href="{{ .censusLink }}" style="color: #5d4e37; text-decoration: none;">{{ .censusTitle }}</a>
+        </h3>
+        <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #666;">
+          <strong>📅 Census Date:</strong> {{ .censusDate }}
+        </p>
+        <p style="margin: 0.5rem 0; color: #5d4e37;">
+          <strong>Schedule {{ .schedule }}</strong>
+          {{ if .street }} - {{ .street }}{{ end }}
+          {{ if .address }} ({{ .address }}){{ end }}
+        </p>
+        
+        {{ if .household }}
+          <div style="margin-top: 1rem; background: white; border-radius: 4px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <h4 style="margin-top: 0; font-size: 0.95rem; color: #5d4e37; border-bottom: 1px solid #e5ddd3; padding-bottom: 0.5rem;">Household Members</h4>
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="background: #f5f3f0; font-size: 0.85rem;">
+                  <th style="padding: 0.5rem; text-align: left; border-bottom: 2px solid #d4c4b0;">Name</th>
+                  <th style="padding: 0.5rem; text-align: left; border-bottom: 2px solid #d4c4b0;">Relation</th>
+                  <th style="padding: 0.5rem; text-align: center; border-bottom: 2px solid #d4c4b0;">Age</th>
+                  <th style="padding: 0.5rem; text-align: left; border-bottom: 2px solid #d4c4b0;">Occupation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{ range $index, $person := .household }}
+                <tr style="{{ if eq (mod $index 2) 0 }}background: #fefdfb;{{ else }}background: white;{{ end }}">
+                  <td style="padding: 0.5rem; border-bottom: 1px solid #e5ddd3;">
+                    {{ if $person.resident }}
+                      {{ with site.GetPage $person.resident }}
+                        <a href="{{ .RelPermalink }}" style="font-weight: bold; color: #8b7355; text-decoration: none; border-bottom: 1px solid #8b7355;">{{ $person.name }}</a>
+                      {{ else }}
+                        {{ $person.name }}
+                      {{ end }}
+                    {{ else }}
+                      {{ $person.name }}
+                    {{ end }}
+                  </td>
+                  <td style="padding: 0.5rem; border-bottom: 1px solid #e5ddd3; font-size: 0.9rem;">{{ $person.relation }}</td>
+                  <td style="padding: 0.5rem; border-bottom: 1px solid #e5ddd3; text-align: center; font-size: 0.9rem;">{{ $person.age }}</td>
+                  <td style="padding: 0.5rem; border-bottom: 1px solid #e5ddd3; font-size: 0.9rem; font-style: italic;">{{ $person.occupation }}</td>
+                </tr>
+                {{ end }}
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top: 1rem; text-align: right;">
+            <a href="{{ .censusLink }}#schedule-{{ .schedule }}" style="color: #8b7355; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+              View full census entry →
+            </a>
+          </p>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+{{ else }}
+  <p>No census records found for this building.</p>
 {{ end }}
 
 <hr>
