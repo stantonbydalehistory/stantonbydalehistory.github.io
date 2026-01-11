@@ -50,7 +50,9 @@ EXPECTED_ARTICLE_FIELDS = {
     'businesses',  # deprecated, should be 'institutions'
     'categories',  # deprecated or alternative taxonomy
     'event_date_note',  # additional context for dates
-    'exclude_from_homepage'  # exclude from random record lists on homepage
+    'exclude_from_homepage',  # exclude from random record lists on homepage
+    'record_type',  # type of record: "announcement" for births/marriages/deaths
+    'announcement_type'  # type of announcement: "birth", "marriage", or "death"
 }
 
 # Expected fields for institutions
