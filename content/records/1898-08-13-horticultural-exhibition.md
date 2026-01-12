@@ -5,9 +5,9 @@ dateAdded: 2026-01-11
 themes: ["community", "agriculture"]
 residents:
   - resident/henry-hall
-  - resident/g-w-crompton
+  - resident/g-crompton
 buildings:
-  - building/main-street/the-hall
+  - building/main-street/stanton-hall
 sources:
   - type: "newspaper"
     title: "Derby Mercury"
