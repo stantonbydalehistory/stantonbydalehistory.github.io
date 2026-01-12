@@ -1,2 +1,3 @@
 # stantonbydalehistory.github.io
-Webpage
+
+Village history website [here](https://stantonbydalehistory.github.io/) with a taxonomy.
