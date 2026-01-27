@@ -1,5 +1,5 @@
 ---
-title: "The Stanton Institute"
+title: "The Stanton Institute, Dale Road"
 photo_date: "c. 1920s"
 image: "/images/photographs/institute-stanton-by-dale.jpg"
 photographer: "Unknown"
