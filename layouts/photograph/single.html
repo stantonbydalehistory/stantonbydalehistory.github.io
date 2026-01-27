@@ -1,0 +1,96 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+{{ if .Params.photo_date }}
+<p class="date" style="margin-bottom: 1rem;">{{ .Params.photo_date }}</p>
+{{ end }}
+
+{{ if .Params.image }}
+<div style="text-align: center; margin: 2rem 0;">
+  <img src="{{ .Params.image }}" alt="{{ .Title }}" style="max-width: 100%; max-height: 85vh; width: auto; height: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+</div>
+{{ end }}
+
+<div class="metadata">
+  {{ if .Params.photographer }}
+  <p><strong>Photographer:</strong> {{ .Params.photographer }}</p>
+  {{ end }}
+  {{ if .Params.location }}
+  <p><strong>Location:</strong> {{ .Params.location }}</p>
+  {{ end }}
+  {{ if .Params.photo_date }}
+  <p><strong>Date:</strong> {{ .Params.photo_date }}</p>
+  {{ end }}
+  {{ if .Params.source }}
+  <p><strong>Source:</strong> {{ .Params.source }}</p>
+  {{ end }}
+</div>
+
+<div class="content">
+  {{ .Content }}
+</div>
+
+{{ if or .Params.buildings .Params.businesses .Params.institutions .Params.residents }}
+<hr>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
+
+  {{ with .Params.buildings }}
+  <div class="content-section">
+    <h3>🏛️ Buildings</h3>
+    <ul>
+      {{ range . }}
+        {{ with site.GetPage . }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  {{ with .Params.businesses }}
+  <div class="content-section">
+    <h3>🏪 Businesses</h3>
+    <ul>
+      {{ range . }}
+        {{ with site.GetPage . }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  {{ with .Params.institutions }}
+  <div class="content-section">
+    <h3>🏢 Institutions</h3>
+    <ul>
+      {{ range . }}
+        {{ with site.GetPage . }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  {{ with .Params.residents }}
+  <div class="content-section">
+    <h3>👤 Residents</h3>
+    <ul>
+      {{ range . }}
+        {{ with site.GetPage . }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+</div>
+{{ end }}
+
+<div style="margin-top: 2rem; text-align: center;">
+  <a href="/photograph/">← Back to all photographs</a>
+</div>
+{{ end }}

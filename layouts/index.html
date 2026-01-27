@@ -4,6 +4,31 @@
   <p style="font-size: 1.1rem; color: #7d6c5a; margin-top: 1rem;">{{ .Content }}</p>
 </div>
 
+{{ $photos := where site.RegularPages "Section" "photograph" }}
+{{ if gt (len $photos) 0 }}
+<div class="content-section" style="margin-bottom: 3rem;">
+  <h2>📸 Historical Photographs</h2>
+  <div id="photo-gallery" style="position: relative; height: 400px; background: #f5f2ed; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    {{ range $photos }}
+      {{ if .Params.image }}
+      <div class="gallery-slide" data-image="{{ .Params.image }}" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
+        <a href="{{ .RelPermalink }}" style="display: block; width: 100%; height: 100%; position: relative; border: none;">
+          <img data-src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 100%; object-fit: cover; background: #e5ddd3;">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 2rem 1rem 1rem; color: #f9f7f4;">
+            <h3 style="color: #f9f7f4; margin: 0 0 0.5rem 0; font-size: 1.3rem; border: none;">{{ .Title }}</h3>
+            {{ if .Params.photo_date }}<p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">{{ .Params.photo_date }}</p>{{ end }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    {{ end }}
+    <button id="prev-photo" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.5rem; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">‹</button>
+    <button id="next-photo" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.5rem; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">›</button>
+  </div>
+  <p style="text-align: right; margin-top: 1rem;"><a href="/photograph/">View all photographs →</a></p>
+</div>
+{{ end }}
+
 <div class="content-section">
   <h2>📜 Random Records</h2>
   <p style="font-style: italic; color: #7d6c5a;">Glimpses into the village's past... ({{ len (where site.RegularPages "Section" "records") }} records total)</p>
@@ -25,6 +50,32 @@
   <h2>📊 Census Records</h2>
   <p style="font-style: italic; color: #7d6c5a;">Browse census records by year.</p>
   <p style="text-align: right; margin-top: 1rem;"><a href="/census/">View census records →</a></p>
+</div>
+
+<div class="content-section">
+  <h2>📖 Trade Directories</h2>
+  <p style="font-style: italic; color: #7d6c5a;">Historical directory excerpts listing people working in the village during different periods.</p>
+  <ul id="trade-directory-list">
+    {{ range (where site.RegularPages "Section" "trade-directory") }}
+      {{ if .Title }}
+        <li style="display: none;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    {{ end }}
+  </ul>
+  <p style="text-align: right; margin-top: 1rem;"><a href="/trade-directory/">View all trade directories →</a></p>
+</div>
+
+<div class="content-section">
+  <h2>🎙️ Interviews</h2>
+  <p style="font-style: italic; color: #7d6c5a;">Primary research interviews with people living in or connected to the village.</p>
+  <ul id="interviews-list">
+    {{ range (where site.RegularPages "Section" "interview") }}
+      {{ if .Title }}
+        <li style="display: none;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    {{ end }}
+  </ul>
+  <p style="text-align: right; margin-top: 1rem;"><a href="/interview/">View all interviews →</a></p>
 </div>
 
 <hr>
@@ -97,9 +148,84 @@ function showRandomItems(listId, count) {
 // Show random items on page load
 document.addEventListener('DOMContentLoaded', function() {
   showRandomItems('records-list', 10);
+  showRandomItems('trade-directory-list', 5);
+  showRandomItems('interviews-list', 5);
   showRandomItems('buildings-list', 8);
   showRandomItems('institutions-list', 8);
   showRandomItems('residents-list', 8);
+
+  // Photo gallery rotation with lazy loading
+  const gallery = document.getElementById('photo-gallery');
+  if (gallery) {
+    const slides = gallery.querySelectorAll('.gallery-slide');
+    let currentSlide = 0;
+    const loadedImages = new Set();
+
+    // Lazy load image
+    function loadImage(index) {
+      if (loadedImages.has(index) || index < 0 || index >= slides.length) return;
+
+      const slide = slides[index];
+      const img = slide.querySelector('img');
+      const src = img.getAttribute('data-src');
+
+      if (src && !img.src) {
+        img.src = src;
+        loadedImages.add(index);
+      }
+    }
+
+    // Preload adjacent images
+    function preloadAdjacent(index) {
+      const nextIndex = (index + 1) % slides.length;
+      const prevIndex = (index - 1 + slides.length) % slides.length;
+      loadImage(nextIndex);
+      loadImage(prevIndex);
+    }
+
+    function showSlide(index) {
+      // Load current image
+      loadImage(index);
+
+      // Show/hide slides
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.style.display = 'block';
+          setTimeout(() => slide.style.opacity = '1', 50);
+        } else {
+          slide.style.opacity = '0';
+          setTimeout(() => slide.style.display = 'none', 1000);
+        }
+      });
+
+      // Preload adjacent images after showing current one
+      setTimeout(() => preloadAdjacent(index), 100);
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    // Show first slide
+    if (slides.length > 0) {
+      showSlide(0);
+
+      // Auto-rotate every 5 seconds
+      setInterval(nextSlide, 5000);
+
+      // Navigation buttons
+      const nextBtn = document.getElementById('next-photo');
+      const prevBtn = document.getElementById('prev-photo');
+      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    }
+  }
 });
 </script>
 {{ end }}

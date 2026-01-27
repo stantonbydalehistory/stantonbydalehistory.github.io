@@ -1,0 +1,43 @@
+{{ define "main" }}
+<div class="content-section">
+  <h1>{{ .Title }}</h1>
+
+  <div style="margin-bottom: 2rem; padding: 1rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
+    {{ with .Params.interviewee }}
+      <p style="margin: 0.25rem 0;"><strong>Interviewee:</strong> {{ . }}</p>
+    {{ end }}
+    {{ with .Params.interviewer }}
+      <p style="margin: 0.25rem 0;"><strong>Interviewer:</strong> {{ . }}</p>
+    {{ end }}
+    {{ with .Date }}
+      <p style="margin: 0.25rem 0;"><strong>Interview Date:</strong> {{ .Format "2 January 2006" }}</p>
+    {{ end }}
+    {{ with .Params.location }}
+      <p style="margin: 0.25rem 0;"><strong>Location:</strong> {{ . }}</p>
+    {{ end }}
+  </div>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  {{ if .Params.audio_file }}
+  <hr style="margin: 2rem 0;">
+  <div>
+    <h2>Audio Recording</h2>
+    <audio controls style="width: 100%; max-width: 600px;">
+      <source src="{{ .Params.audio_file }}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  {{ end }}
+
+  {{ if .Params.transcript_file }}
+  <div style="margin-top: 1rem;">
+    <p><a href="{{ .Params.transcript_file }}">Download full transcript</a></p>
+  </div>
+  {{ end }}
+
+  <p style="margin-top: 2rem;"><a href="/interview/">← Back to Interviews</a></p>
+</div>
+{{ end }}

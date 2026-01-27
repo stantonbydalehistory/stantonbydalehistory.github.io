@@ -1,0 +1,23 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<p style="font-style: italic; color: #7d6c5a;">{{ .Content }}</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+  {{ range .Pages }}
+  <div class="content-section" style="text-align: center;">
+    {{ if .Params.image }}
+    <a href="{{ .RelPermalink }}">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; border: none;">
+    </a>
+    {{ end }}
+    <h3 style="margin-top: 0.5rem;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{ if .Params.photo_date }}
+    <p class="date">{{ .Params.photo_date }}</p>
+    {{ end }}
+    {{ if .Params.description }}
+    <p style="font-size: 0.9rem; color: #7d6c5a; margin-top: 0.5rem;">{{ .Params.description }}</p>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

@@ -204,6 +204,14 @@
   {{ end }}
 {{ end }}
 
+{{/* Photographs that reference THIS building */}}
+{{ range where site.RegularPages "Section" "photograph" }}
+  {{ if in .Params.buildings $currentFile }}
+    {{ $records = $records | append (dict "link" .RelPermalink "title" .Title "date" .Date "note" "") }}
+    {{ $seenRecords = merge $seenRecords (dict .RelPermalink true) }}
+  {{ end }}
+{{ end }}
+
 {{/* Records that reference INSTITUTIONS in this building (skip if already seen) */}}
 {{ with $.Params.institutions }}
   {{ range . }}

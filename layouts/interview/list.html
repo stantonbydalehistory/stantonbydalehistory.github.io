@@ -1,0 +1,30 @@
+{{ define "main" }}
+<h1>🎙️ Interviews</h1>
+<p style="font-style: italic; color: #7d6c5a; font-size: 1.1rem; margin-bottom: 2rem;">
+  Primary research interviews with people living in or connected to Stanton-by-Dale, capturing their memories, stories, and perspectives on village life past and present.
+</p>
+
+<div class="content-section">
+  {{ $pages := where site.RegularPages "Section" "interview" }}
+  {{ $pagesByDate := $pages.ByDate.Reverse }}
+
+  {{ if gt (len $pages) 0 }}
+    <ul style="list-style: none; margin-left: 0;">
+      {{ range $pagesByDate }}
+        <li style="padding: 0.75rem; margin-bottom: 0.75rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
+          <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold; font-size: 1.05rem;">{{ .Title }}</a>
+          {{ with .Params.interviewee }}
+            <br><span style="color: #7d6c5a;">Interviewee: {{ . }}</span>
+          {{ end }}
+          {{ with .Date }}<br><span class="date">Interview date: {{ .Format "2 January 2006" }}</span>{{ end }}
+          {{ with .Params.interviewer }}
+            <br><small style="color: #999;">Conducted by: {{ . }}</small>
+          {{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  {{ else }}
+    <p style="font-style: italic; color: #999;">No interviews found yet.</p>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,30 @@
+{{ define "main" }}
+<h1>📖 Trade Directories</h1>
+<p style="font-style: italic; color: #7d6c5a; font-size: 1.1rem; margin-bottom: 2rem;">
+  Historical trade directories provide valuable snapshots of village life, listing the people who worked in Stanton-by-Dale at different points in time.
+</p>
+
+<div class="content-section">
+  {{ $pages := where site.RegularPages "Section" "trade-directory" }}
+  {{ $pagesByYear := $pages.GroupByDate "2006" "asc" }}
+
+  {{ range $pagesByYear }}
+    <h2 style="margin-top: 2rem;">{{ .Key }}</h2>
+    <ul style="list-style: none; margin-left: 0;">
+      {{ range .Pages }}
+        <li style="padding: 0.75rem; margin-bottom: 0.75rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
+          <a href="{{ .RelPermalink }}" style="border: none; font-weight: bold; font-size: 1.05rem;">{{ .Title }}</a>
+          {{ with .Date }}<br><span class="date">{{ .Format "2 January 2006" }}</span>{{ end }}
+          {{ with .Params.directory_name }}
+            <br><small style="color: #7d6c5a;">📚 {{ . }}</small>
+          {{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+
+  {{ if eq (len $pages) 0 }}
+    <p style="font-style: italic; color: #999;">No trade directory entries found yet.</p>
+  {{ end }}
+</div>
+{{ end }}

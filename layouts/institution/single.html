@@ -58,6 +58,13 @@
   {{ end }}
 {{ end }}
 
+{{/* Find all photographs that reference this institution */}}
+{{ range where site.RegularPages "Section" "photograph" }}
+  {{ if in .Params.institutions $currentFile }}
+    {{ $records = $records | append . }}
+  {{ end }}
+{{ end }}
+
 {{ if $records }}
   <ul>
     {{ range sort $records "Date" }}

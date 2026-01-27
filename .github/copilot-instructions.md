@@ -260,6 +260,94 @@ fields:
     help: "Y if born in same county, N if not, or country name"
 ```
 
+### 6. Photographs
+Location: `content/photograph/`
+Filename format: `descriptive-name.md`
+
+**Required Fields:**
+```yaml
+---
+title: "Photograph Title"
+photo_date: "c. 1900"  # Can be approximate: "c. 1900", "Early 1930s", or specific: "1952"
+image: "/images/photographs/filename.jpg"  # Path to image in static/images/photographs/
+---
+```
+
+**Optional Fields:**
+```yaml
+photographer: "Unknown"  # Who took the photo
+location: "High Street, Stanton by Dale"  # Where photo was taken
+source: "Village Archive"  # Where photo came from
+description: "A glimpse of village life"  # Short description for gallery view
+
+# Linking to related entities (same as historical records)
+buildings: []  # Array of building/street/filename references
+institutions: []  # Array of institution/filename references
+residents: []  # Array of resident/filename references
+```
+
+**Image Storage:**
+- Place image files in `/static/images/photographs/`
+- Supported formats: JPG, PNG
+- Reference in frontmatter as `/images/photographs/filename.jpg` (note: no "static" prefix)
+
+**Linking Behavior:**
+- Photographs work the same as historical records for linking
+- When you link a photograph to buildings/institutions/residents, it will appear on those entity pages
+- Bidirectional: photographs show linked entities, and entities show linked photographs
+
+### 7. Interviews
+Location: `content/interview/`
+Filename format: `YYYY-MM-DD-interviewee-name.md`
+
+**Required Fields:**
+```yaml
+---
+title: "Interview with [Name]"
+date: YYYY-MM-DD  # Date of interview
+dateAdded: YYYY-MM-DD  # Date added to site
+interviewee: "Person Name"
+interviewer: "Interviewer Name"
+location: "Location"
+---
+```
+
+**Optional Fields:**
+```yaml
+audio_file: "/path/to/audio.mp3"  # Path to audio recording
+transcript_file: "/path/to/transcript.pdf"  # Path to transcript PDF
+buildings: []  # Array of building references mentioned in interview
+institutions: []  # Array of institution references
+residents: []  # Array of resident references
+```
+
+### 8. Trade Directories
+Location: `content/trade-directory/`
+Filename format: `YYYY-directory-name.md`
+
+**Required Fields:**
+```yaml
+---
+title: "Directory Name, Year"
+date: YYYY-MM-DD  # Publication date
+dateAdded: YYYY-MM-DD  # Date added to site
+directory_name: "Full Directory Name"
+publisher: "Publisher Name"
+sources:
+  - type: "directory"
+    title: "Full Directory Name"
+    date: YYYY
+    page: null  # or page number
+---
+```
+
+**Optional Fields:**
+```yaml
+buildings: []  # Buildings mentioned in directory
+institutions: []  # Institutions/businesses listed
+residents: []  # People mentioned
+```
+
 ## Validation
 Run `python3 validate-metadata.py` to check all metadata conforms to standards after each edit.
 
@@ -268,6 +356,9 @@ Run `python3 validate-metadata.py` to check all metadata conforms to standards a
 - Buildings: `building/street-name/filename`
 - Institutions: `institution/filename`
 - Census: `census/YYYY` (e.g., `census/1861`)
+- Photographs: `photograph/filename`
+- Interviews: `interview/filename`
+- Trade Directories: `trade-directory/filename`
 
 ## Examples
 
@@ -416,6 +507,29 @@ aliases:
 The Stanton Ironworks was a major employer in the area...
 ```
 
+### Example Photograph
+```yaml
+---
+title: "The Chequers Inn, 1930s"
+photo_date: "c. 1935"
+image: "/images/photographs/chequers-1930s.jpg"
+photographer: "Unknown"
+location: "Dale Road, Stanton by Dale"
+source: "Village Archive Collection"
+description: "The Chequers Inn with licensee standing in doorway"
+buildings:
+  - building/dale-road/chequers-inn
+institutions:
+  - institution/chequers-inn
+residents:
+  - resident/john-smith
+---
+
+This photograph shows the Chequers Inn in the mid-1930s. The building features the characteristic stone construction typical of the area. Standing in the doorway is believed to be John Smith, the licensee at that time.
+
+The pub served as a focal point for the community throughout this period.
+```
+
 ## Common Patterns
 
 ### When creating a record from a newspaper screenshot:
@@ -447,6 +561,15 @@ The Stanton Ironworks was a major employer in the area...
 5. Link households to buildings where applicable
 6. Add notes to individual households if needed
 7. All households for a year go in one file
+
+### When creating a photograph:
+1. Use descriptive filename: `descriptive-name.md` (e.g., `chequers-inn-1930s.md`)
+2. Place image file in `/static/images/photographs/`
+3. Reference image as `/images/photographs/filename.jpg` (no "static" prefix)
+4. Use approximate dates when exact date unknown: "c. 1935", "Early 1900s", "1950s"
+5. Link to buildings, institutions, and residents visible or mentioned
+6. Add descriptive content in markdown body with historical context
+7. Use `description` field for short gallery caption
 
 ## Workflow
 1. Create/edit content

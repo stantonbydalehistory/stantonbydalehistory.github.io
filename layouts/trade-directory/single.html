@@ -1,0 +1,43 @@
+{{ define "main" }}
+<div class="content-section">
+  <h1>{{ .Title }}</h1>
+
+  <div style="margin-bottom: 2rem; padding: 1rem; background: #f9f7f4; border-left: 3px solid #8b7355; border-radius: 4px;">
+    {{ with .Date }}
+      <p style="margin: 0.25rem 0;"><strong>Year:</strong> {{ .Format "2006" }}</p>
+    {{ end }}
+    {{ with .Params.directory_name }}
+      <p style="margin: 0.25rem 0;"><strong>Directory:</strong> {{ . }}</p>
+    {{ end }}
+    {{ with .Params.publisher }}
+      <p style="margin: 0.25rem 0;"><strong>Publisher:</strong> {{ . }}</p>
+    {{ end }}
+  </div>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  {{ if .Params.sources }}
+  <hr style="margin: 2rem 0;">
+  <div>
+    <h2>Sources</h2>
+    <ul>
+      {{ range .Params.sources }}
+        <li>
+          {{ if .url }}
+            <a href="{{ .url }}">{{ .title }}</a>
+          {{ else }}
+            {{ .title }}
+          {{ end }}
+          {{ with .date }} ({{ . }}){{ end }}
+          {{ with .page }}, p. {{ . }}{{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  <p style="margin-top: 2rem;"><a href="/trade-directory/">← Back to Trade Directories</a></p>
+</div>
+{{ end }}
