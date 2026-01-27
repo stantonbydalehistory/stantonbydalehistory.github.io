@@ -24,6 +24,12 @@
   {{ if .Params.source }}
   <p><strong>Source:</strong> {{ .Params.source }}</p>
   {{ end }}
+  {{ if .Params.copyright }}
+  <p><strong>Copyright:</strong> {{ .Params.copyright }}</p>
+  {{ end }}
+  {{ if .Params.attribution }}
+  <p class="attribution" style="font-style: italic; margin-top: 1rem;">{{ .Params.attribution | safeHTML }}</p>
+  {{ end }}
 </div>
 
 <div class="content">
