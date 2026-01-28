@@ -79,6 +79,12 @@ EXPECTED_CENSUS_FIELDS = {
     'draft', 'summary'
 }
 
+EXPECTED_PHOTOGRAPH_FIELDS = {
+    'title', 'photo_date', 'image', 'photographer', 'location', 'source',
+    'copyright', 'attribution', 'description', 'draft',
+    'institutions', 'buildings', 'residents'
+}
+
 # Valid institution types (enum)
 VALID_INSTITUTION_TYPES = {
     'business',
@@ -425,6 +431,80 @@ def validate_census(file_path, content_dir, errors, warnings):
                             f"{relative_path}: entries[{i}].building '{building_path}.md' does not exist"
                         )
 
+def validate_photograph(file_path, content_dir, errors, warnings):
+    """Validate a single photograph's metadata."""
+    relative_path = file_path.relative_to(content_dir)
+    frontmatter = extract_frontmatter(file_path)
+
+    if not frontmatter:
+        errors.append(f"{relative_path}: No valid frontmatter found")
+        return
+
+    # Check for unexpected fields
+    for field in frontmatter.keys():
+        if field not in EXPECTED_PHOTOGRAPH_FIELDS:
+            errors.append(f"{relative_path}: Unexpected field '{field}'")
+
+    # Check required fields
+    if 'title' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'title' field")
+    if 'photo_date' not in frontmatter:
+        warnings.append(f"{relative_path}: Missing 'photo_date' field")
+    if 'image' not in frontmatter:
+        errors.append(f"{relative_path}: Missing 'image' field")
+    if 'photographer' not in frontmatter:
+        warnings.append(f"{relative_path}: Missing 'photographer' field")
+    if 'location' not in frontmatter:
+        warnings.append(f"{relative_path}: Missing 'location' field")
+
+    # Check residents
+    if 'residents' in frontmatter:
+        residents = frontmatter['residents']
+        if not isinstance(residents, list):
+            errors.append(f"{relative_path}: 'residents' should be an array")
+        else:
+            for resident in residents:
+                if not resident.startswith('resident/'):
+                    errors.append(
+                        f"{relative_path}: resident path '{resident}' should start with 'resident/'"
+                    )
+                elif not file_exists(content_dir, resident):
+                    errors.append(
+                        f"{relative_path}: resident file '{resident}.md' does not exist"
+                    )
+
+    # Check buildings
+    if 'buildings' in frontmatter:
+        buildings = frontmatter['buildings']
+        if not isinstance(buildings, list):
+            errors.append(f"{relative_path}: 'buildings' should be an array")
+        else:
+            for building in buildings:
+                if not building.startswith('building/'):
+                    errors.append(
+                        f"{relative_path}: building path '{building}' should start with 'building/'"
+                    )
+                elif not file_exists(content_dir, building):
+                    errors.append(
+                        f"{relative_path}: building file '{building}.md' does not exist"
+                    )
+
+    # Check institutions
+    if 'institutions' in frontmatter:
+        institutions = frontmatter['institutions']
+        if not isinstance(institutions, list):
+            errors.append(f"{relative_path}: 'institutions' should be an array")
+        else:
+            for institution in institutions:
+                if not institution.startswith('institution/'):
+                    errors.append(
+                        f"{relative_path}: institution path '{institution}' should start with 'institution/'"
+                    )
+                elif not file_exists(content_dir, institution):
+                    errors.append(
+                        f"{relative_path}: institution file '{institution}.md' does not exist"
+                    )
+
 
 def get_file_context(file_path, content_dir):
     """Get the frontmatter context of a file for LLM fixing."""
@@ -444,12 +524,13 @@ def main():
     institution_dir = content_dir / 'institution'
     resident_dir = content_dir / 'resident'
     census_dir = content_dir / 'census'
+    photograph_dir = content_dir / 'photograph'
     
     if not records_dir.exists():
         print(f"{Colors.RED}❌ Records directory not found: {records_dir}{Colors.RESET}")
         sys.exit(1)
     
-    print(f"{Colors.BLUE}🔍 Validating metadata in all articles, institutions, and residents...{Colors.RESET}\n")
+    print(f"{Colors.BLUE}🔍 Validating metadata in all articles, institutions, residents, and photographs...{Colors.RESET}\n")
     
     # Get all markdown files
     article_files = list(records_dir.rglob('*.md'))
@@ -470,6 +551,11 @@ def main():
     if census_dir.exists():
         census_files = [f for f in census_dir.rglob('*.md') if f.name != '_index.md']
         print(f"Found {len(census_files)} census records to validate")
+
+    photograph_files = []
+    if photograph_dir.exists():
+        photograph_files = [f for f in photograph_dir.glob('*.md') if f.name != '_index.md']
+        print(f"Found {len(photograph_files)} photographs to validate")
     print()
     
     errors = []
@@ -491,6 +577,10 @@ def main():
     # Validate each census record
     for census_file in census_files:
         validate_census(census_file, content_dir, errors, warnings)
+
+    # Validate each photograph
+    for photograph_file in photograph_files:
+        validate_photograph(photograph_file, content_dir, errors, warnings)
 
     # Collect context for files with errors
     for error in errors:
