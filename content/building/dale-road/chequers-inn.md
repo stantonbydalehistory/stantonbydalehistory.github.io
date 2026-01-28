@@ -10,7 +10,8 @@ roles:
 institutions:
   - institution/chequers-inn
 
-residents: []           # TODO: list resident/… pages when known
+residents:
+  - resident/henry-andrews
 built: null             # TODO: year if known
 aliases:
   - "The Chequers"
