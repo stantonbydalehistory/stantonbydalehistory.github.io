@@ -13,13 +13,18 @@ institutions:
 
 residents:
   - resident/richard-scattergood
+  - resident/edward-burrows
 
 person_building_links:
   resident/richard-scattergood:
     - building/stanhope-street/stanhope-arms
+  resident/edward-burrows:
+    - building/stanhope-street/stanhope-arms
 
 person_institution_links:
   resident/richard-scattergood:
+    - institution/stanhope-arms
+  resident/edward-burrows:
     - institution/stanhope-arms
 
 sources:
