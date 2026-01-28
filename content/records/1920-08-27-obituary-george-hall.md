@@ -10,6 +10,7 @@ institutions:
   - institution/stanton-ironworks
   - institution/oddfellows-lodge
   - institution/wesleyan-chapel
+  - institution/stanton-institute
 residents:
   - resident/george-hall
 person_building_links:
@@ -20,6 +21,7 @@ person_institution_links:
     - institution/stanton-ironworks
     - institution/oddfellows-lodge
     - institution/wesleyan-chapel
+    - institution/stanton-institute
 sources:
   - type: "newspaper"
     title: "The Stapleford and Sandiacre News"

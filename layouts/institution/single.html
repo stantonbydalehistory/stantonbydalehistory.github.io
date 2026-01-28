@@ -33,12 +33,42 @@
 <hr>
 
 <h2>Associated Residents</h2>
+{{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
+{{ $residents := slice }}
+{{ $seenResidents := slice }}
+
+{{/* DIRECT residents assigned to this institution */}}
 {{ with .Params.residents }}
-  <ul>
-    {{ range . }}
-      {{ with site.GetPage . }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ range . }}
+    {{ with site.GetPage . }}
+      {{ if not (in $seenResidents .RelPermalink) }}
+        {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" "") }}
+        {{ $seenResidents = $seenResidents | append .RelPermalink }}
       {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Residents from records with person_institution_links mapping */}}
+{{ range where site.RegularPages "Section" "records" }}
+  {{ if .Params.person_institution_links }}
+    {{ range $residentPath, $institutionList := .Params.person_institution_links }}
+      {{ if in $institutionList $currentFile }}
+        {{ with site.GetPage $residentPath }}
+          {{ if not (in $seenResidents .RelPermalink) }}
+            {{ $residents = $residents | append (dict "link" .RelPermalink "title" .Title "note" "") }}
+            {{ $seenResidents = $seenResidents | append .RelPermalink }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $residents }}
+  <ul>
+    {{ range $residents }}
+      <li><a href="{{ .link }}">{{ .title }}</a> {{ .note }}</li>
     {{ end }}
   </ul>
 {{ else }}
@@ -47,19 +77,46 @@
 
 <hr>
 
-<h2>Historical Records</h2>
+<h2>📷 Photographs</h2>
 {{ $currentFile := strings.TrimSuffix ".md" .File.Path }}
+{{ $photos := slice }}
+
+{{/* Photographs that reference THIS institution */}}
+{{ range where site.RegularPages "Section" "photograph" }}
+  {{ if in .Params.institutions $currentFile }}
+    {{ $photos = $photos | append . }}
+  {{ end }}
+{{ end }}
+
+{{ if $photos }}
+  <div class="photo-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+    {{ range $photos }}
+      <a href="{{ .RelPermalink }}" style="text-decoration: none; color: inherit;">
+        <div style="background: #f9f7f4; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+          {{ if .Params.image }}
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 150px; object-fit: cover;">
+          {{ end }}
+          <div style="padding: 0.75rem;">
+            <p style="margin: 0; font-weight: bold; font-size: 0.9rem; color: #5d4e37;">{{ .Title }}</p>
+            {{ with .Params.photo_date }}
+              <p style="margin: 0.25rem 0 0; font-size: 0.8rem; color: #7d6c5a;">{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </a>
+    {{ end }}
+  </div>
+{{ else }}
+  <p>No photographs found for this institution.</p>
+{{ end }}
+
+<hr>
+
+<h2>Historical Records</h2>
 {{ $records := slice }}
 
 {{/* Find all records that reference this institution */}}
 {{ range where site.RegularPages "Section" "records" }}
-  {{ if in .Params.institutions $currentFile }}
-    {{ $records = $records | append . }}
-  {{ end }}
-{{ end }}
-
-{{/* Find all photographs that reference this institution */}}
-{{ range where site.RegularPages "Section" "photograph" }}
   {{ if in .Params.institutions $currentFile }}
     {{ $records = $records | append . }}
   {{ end }}

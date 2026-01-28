@@ -52,6 +52,7 @@
   <p style="text-align: right; margin-top: 1rem;"><a href="/census/">View census records →</a></p>
 </div>
 
+{{/*
 <div class="content-section">
   <h2>📖 Trade Directories</h2>
   <p style="font-style: italic; color: #7d6c5a;">Historical directory excerpts listing people working in the village during different periods.</p>
@@ -77,6 +78,7 @@
   </ul>
   <p style="text-align: right; margin-top: 1rem;"><a href="/interview/">View all interviews →</a></p>
 </div>
+*/}}
 
 <hr>
 
@@ -148,8 +150,8 @@ function showRandomItems(listId, count) {
 // Show random items on page load
 document.addEventListener('DOMContentLoaded', function() {
   showRandomItems('records-list', 10);
-  showRandomItems('trade-directory-list', 5);
-  showRandomItems('interviews-list', 5);
+  // showRandomItems('trade-directory-list', 5);
+  // showRandomItems('interviews-list', 5);
   showRandomItems('buildings-list', 8);
   showRandomItems('institutions-list', 8);
   showRandomItems('residents-list', 8);
